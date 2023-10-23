@@ -1,0 +1,25 @@
+.toolbar {
+  background-color: rgb(64, 62, 62);
+}
+
+.toolbar h2 {
+  color: #ffbb33;
+}
+
+.links {
+  color: #ffbb33;
+  font-size: 18px;
+}
+
+.links :hover {
+  color: #ec17a8;
+  font-weight: bold;
+}
+
+.iconeDirection svg {
+  color: #fff;
+}
+
+.img {
+  width: 200px;
+}

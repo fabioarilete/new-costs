@@ -1,0 +1,46 @@
+NewCost
+ - um estado para manter todo o custo
+ - steps<number>
+ - handleSubmit();
+ - handleValidation();
+ - cost context;
+ - handleChange() -> alterar os dados do formulário principal
+ - handleAddMaterial() => adicionar materiais ao custo
+ - handleAddOperations() => adicionar operações ao custo
+ - handleRemoveMaterial() => remover material
+ - handleRemoveOperation() => remover operações
+ - valor total do custo (pode ser usado um useMemo)
+
+
+
+UpdateCost
+ - carregar da api o custo
+ - um estado para manter todo o custo
+ - steps<number>
+ - handleSubmit();
+ - handleValidation();
+ - cost context;
+ - handleChange() -> alterar os dados do formulário principal
+ - handleAddMaterial() => adicionar materiais ao custo
+ - handleAddOperations() => adicionar operações ao custo
+ - handleRemoveMaterial() => remover material
+ - handleRemoveOperation() => remover operações
+ - valor total do custo (pode ser usado um useMemo)
+
+
+Formulário principal
+Formulário materiais
+Formulário operações
+* todos os formulários devem acessar os dados do custo via contexto.
+
+Contexto
+ - estado principal do custo
+ - valor total do custo
+ - handleChange() -> alterar os dados do formulário principal
+ - handleAddMaterial() => adicionar materiais ao custo
+ - handleAddOperations() => adicionar operações ao custo
+ - handleRemoveMaterial() => remover material
+ - handleRemoveOperation() => remover operações
+
+em que momentar salvar o custo?
+quando todos os dados estiverem completos.
