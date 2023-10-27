@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Input = styled.input`
+export const Select = styled.select`
   display: flex;
   flex-direction: column;
   width: 600px;

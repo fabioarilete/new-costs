@@ -1,18 +1,18 @@
 import styled from 'styled-components';
 
-export const Input = styled.input`
+export const Select = styled.select`
   display: flex;
   flex-direction: column;
-  width: 600px;
+  width: 100%;
   padding: 0.7em;
   margin-bottom: 20px;
   border-radius: 5px;
-  border: 1px solid rgb(64, 62, 62);
+  border: 0.5px solid #08a67c;
   font-size: 18px;
 
   &:focus {
-    outline: 1px solid rgb(64, 62, 62);
-    border-color: rgb(64, 62, 62);
+    outline: 1px solid #08a67c;
+    border-color: #08a67c;
   }
 
   &::placeholder {

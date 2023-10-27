@@ -1,18 +1,16 @@
 import styled from 'styled-components';
 
 export const Input = styled.input`
-  display: flex;
-  flex-direction: column;
-  width: 600px;
   padding: 0.7em;
+  margin: 10px;
   margin-bottom: 20px;
   border-radius: 5px;
-  border: 1px solid rgb(64, 62, 62);
+  border: 0.5px solid #7b7b7b;
   font-size: 18px;
 
   &:focus {
-    outline: 1px solid rgb(64, 62, 62);
-    border-color: rgb(64, 62, 62);
+    outline: 1px solid black;
+    border-color: black;
   }
 
   &::placeholder {
@@ -24,5 +22,10 @@ export const Label = styled.label`
   margin-bottom: 2px;
   font-weight: bold;
   font-size: 18px;
-  color: #7b7b7b;
+`;
+
+export const HelperText = styled.p`
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
 `;

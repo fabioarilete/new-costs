@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Header = styled.div`
-  width: 1200px;
+  width: 900px;
   height: 100px;
   margin-bottom: 10px;
   display: flex;
@@ -20,14 +20,14 @@ export const Header = styled.div`
     justify-content: space-around;
   }
 
-  .headerMaterials {
+  .headerOperations {
     width: 100%;
     display: flex;
   }
 
   .actions {
     font-weight: bold;
-    width: 18%;
+    width: 30%;
     text-align: center;
   }
 
@@ -36,25 +36,12 @@ export const Header = styled.div`
   }
   .name {
     text-align: center;
-    width: 32%;
+    width: 45%;
   }
 
-  .type {
-    width: 12%;
+  .valor {
     text-align: center;
-  }
-
-  .nf,
-  .icms,
-  .frete {
-    width: 7%;
-    text-align: center;
-  }
-
-  .inicialPrice,
-  .finalPrice {
-    text-align: center;
-    width: 10%;
+    width: 25%;
   }
 
   .head {
@@ -95,7 +82,7 @@ export const Header = styled.div`
 `;
 
 export const ContainerList = styled.div`
-  width: 1200px;
+  width: 900px;
   display: flex;
   justify-content: center;
   align-items: center;

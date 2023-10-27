@@ -15,9 +15,9 @@ code {
 html,
 body,
 #root {
-  background-color: #08a67c;
+  background-color: #f1ecec;
   height: 100vh;
-  margin: auto;
+  margin: 0 auto;
   justify-content: center;
   align-items: center;
 }

@@ -2,10 +2,8 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   z-index: 9999;
-  top: -120px;
-  bottom: -180px;
-  left: -100px;
-  right: 0;
+  width: 100%;
+  height: 100%;
   position: absolute;
   background: rgba(0, 0, 0, 0.7);
   display: flex;
@@ -14,7 +12,8 @@ export const Container = styled.div`
 `;
 
 export const Form = styled.form`
-  z-index: 9000;
+  z-index: 9999;
+  margin: 0 auto;
   width: 620px;
   top: 5%;
   bottom: 10%;
@@ -62,6 +61,7 @@ export const Form = styled.form`
   }
 
   .containerRadioButton {
+    margin-bottom: 15px;
     border-radius: 5px;
     background-color: #fff;
     width: 300px;

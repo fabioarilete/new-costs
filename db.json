@@ -1,6 +1,201 @@
 {
   "products": [],
-  "materialsList": [],
-  "operationsList": [],
+  "materialsList": [
+    {
+      "id": 1,
+      "name": "BACIA PLÁSTICA 12 L ",
+      "preco": 4.57,
+      "frete": 5,
+      "icms": 18,
+      "nf": 100,
+      "tipoFornecedor": "0",
+      "total": 3.9759,
+      "unid": "UN"
+    },
+    {
+      "id": 2,
+      "name": "BACIA PLÁSTICA 32 L",
+      "preco": 10.7,
+      "frete": 5,
+      "icms": 18,
+      "nf": 100,
+      "tipoFornecedor": "0",
+      "total": 9.309,
+      "unid": "UN"
+    },
+    {
+      "id": 3,
+      "name": "BALDE PLÁSTICO 15 L",
+      "preco": 5.15,
+      "frete": 5,
+      "icms": 18,
+      "nf": 100,
+      "tipoFornecedor": "0",
+      "total": 4.480500000000001,
+      "unid": "UN"
+    },
+    {
+      "id": 4,
+      "name": "BALDE PLÁSTICO 8 L",
+      "preco": 4,
+      "frete": 5,
+      "icms": 18,
+      "nf": 100,
+      "tipoFornecedor": "0",
+      "total": 3.4800000000000004,
+      "unid": "UN"
+    },
+    {
+      "id": 5,
+      "name": "BOBINA PARA SACO DE LIXO",
+      "preco": 8.1,
+      "frete": 7,
+      "icms": 18,
+      "nf": 100,
+      "tipoFornecedor": "1",
+      "total": 8.667,
+      "unid": "KG"
+    },
+    {
+      "id": 6,
+      "name": "BORRACHA EVA P/ RODO - DUPLO MAD 30CM",
+      "preco": 0.32,
+      "frete": 10,
+      "icms": 18,
+      "nf": 100,
+      "tipoFornecedor": "0",
+      "total": 0.2944,
+      "unid": "UN"
+    },
+    {
+      "id": 7,
+      "name": "BORRACHA EVA P/ RODO - DUPLO MAD 40CM",
+      "preco": 0.43,
+      "frete": 10,
+      "icms": 18,
+      "nf": 100,
+      "tipoFornecedor": "0",
+      "total": 0.3956,
+      "unid": "UN"
+    },
+    {
+      "id": 8,
+      "name": "BORRACHA EVA P/ RODO - DUPLO MAD 60CM",
+      "preco": 0.64,
+      "frete": 10,
+      "icms": 18,
+      "nf": 100,
+      "tipoFornecedor": "0",
+      "total": 0.5888,
+      "unid": "UN"
+    },
+    {
+      "id": 9,
+      "name": "BORRACHA EVA P/ RODO - PUXE E SEK 30CM",
+      "preco": 1.07,
+      "frete": 10,
+      "icms": 18,
+      "nf": 100,
+      "tipoFornecedor": "0",
+      "total": 0.9844,
+      "unid": "UN"
+    },
+    {
+      "id": 10,
+      "name": "BORRACHA EVA P/ RODO - PUXE E SEK 40CM",
+      "preco": 1.288,
+      "frete": 10,
+      "icms": 18,
+      "nf": 100,
+      "tipoFornecedor": "0",
+      "total": 1.18496,
+      "unid": "UN"
+    },
+    {
+      "id": 11,
+      "name": "BORRACHA EVA P/ RODO - PUXE E SEK 60CM",
+      "preco": 1.84,
+      "frete": 10,
+      "icms": 18,
+      "nf": 100,
+      "tipoFornecedor": "0",
+      "total": 1.6928,
+      "unid": "UN"
+    }
+  ],
+  "operationsList": [
+    {
+      "id": 1,
+      "name": "MONTAGEM",
+      "valor": 44,
+      "unid": "HR"
+    },
+    {
+      "id": 2,
+      "name": "EMBALAGEM",
+      "valor": 44,
+      "unid": "HR"
+    },
+    {
+      "id": 3,
+      "name": "COLAGEM DE ESPUMA",
+      "valor": 44,
+      "unid": "HR"
+    },
+    {
+      "id": 4,
+      "name": "INJETORA",
+      "valor": 100,
+      "unid": "HR"
+    },
+    {
+      "id": 5,
+      "name": "TUFAGEM SIMPLES - BELLINHA E ETC",
+      "valor": 5,
+      "unid": "DZ"
+    },
+    {
+      "id": 6,
+      "name": "TUFAGEM ESCOVA SANITÁRIA",
+      "valor": 6.6,
+      "unid": "DZ"
+    },
+    {
+      "id": 7,
+      "name": "TUFAGEM ESCOVA LAVA COSTA",
+      "valor": 6,
+      "unid": "DZ"
+    },
+    {
+      "id": 8,
+      "name": "TUFAGEM BRUXINHA",
+      "valor": 4.4,
+      "unid": "DZ"
+    },
+    {
+      "id": 9,
+      "name": "TUFAGEM ESCOVA OVAL",
+      "valor": 3.9,
+      "unid": "DZ"
+    },
+    {
+      "id": 10,
+      "name": "TUFAGEM SUPERBELLA",
+      "valor": 6.6,
+      "unid": "DZ"
+    },
+    {
+      "id": 11,
+      "name": "TUFAGEM PELO BOLA",
+      "valor": 38.5,
+      "unid": "DZ"
+    },
+    {
+      "id": 12,
+      "name": "PINTURA DE PÁ",
+      "valor": 13.8,
+      "unid": "DZ"
+    }
+  ],
   "markUpsList": []
 }

@@ -3,7 +3,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import AppRoutes from './routes/Routes';
 import Container from './components/Container';
 import SideBar from './components/Sidebar';
-import { Footer } from './components/Footer';
 
 type Props = {};
 
@@ -14,7 +13,6 @@ const App = (props: Props) => {
       <Container>
         <AppRoutes />
       </Container>
-      <Footer />
     </Router>
   );
 };

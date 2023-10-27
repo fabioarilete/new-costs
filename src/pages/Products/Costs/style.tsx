@@ -3,62 +3,22 @@ import styled from 'styled-components';
 export const Header = styled.div`
   width: 1200px;
   height: 100px;
+  margin-top: -30px;
   margin-bottom: 10px;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 2px 2px 5px #00000083;
 
   .head {
+    border: 1px solid red;
     align-items: center;
     padding: 5px;
     width: 100%;
     display: flex;
     justify-content: space-around;
-  }
-
-  .headerMaterials {
-    width: 100%;
-    display: flex;
-  }
-
-  .actions {
-    font-weight: bold;
-    width: 18%;
-    text-align: center;
-  }
-
-  .td {
-    font-weight: bold;
-  }
-  .name {
-    text-align: center;
-    width: 32%;
-  }
-
-  .type {
-    width: 12%;
-    text-align: center;
-  }
-
-  .nf,
-  .icms,
-  .frete {
-    width: 7%;
-    text-align: center;
-  }
-
-  .inicialPrice,
-  .finalPrice {
-    text-align: center;
-    width: 10%;
-  }
-
-  .head {
-    display: flex;
   }
 
   .title {
@@ -72,7 +32,7 @@ export const Header = styled.div`
   }
 
   .btn {
-    width: 200px;
+    width: 250px;
     height: 35px;
     border-radius: 5px;
     background-color: rgb(64, 62, 62);
@@ -94,8 +54,9 @@ export const Header = styled.div`
   }
 `;
 
-export const ContainerList = styled.div`
+export const ContainerCards = styled.div`
   width: 1200px;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

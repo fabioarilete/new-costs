@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   z-index: 9999;
-  top: -120px;
+  top: -140px;
   bottom: -180px;
-  left: -100px;
+  left: -450px;
   right: 0;
   position: absolute;
   background: rgba(0, 0, 0, 0.7);
@@ -16,7 +16,7 @@ export const Container = styled.div`
 export const Form = styled.form`
   z-index: 9000;
   width: 620px;
-  top: 5%;
+  margin-top: -350px;
   bottom: 10%;
   padding: 15px;
   display: flex;
@@ -76,7 +76,7 @@ export const Form = styled.form`
     margin-bottom: 2px;
     font-weight: bold;
     font-size: 18px;
-    color: #7b7b7b;
+    color: rgb(64, 62, 62);
   }
 
   .containerButtons {
