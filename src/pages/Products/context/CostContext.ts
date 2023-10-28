@@ -8,8 +8,8 @@ interface CostContextValue {
   setCost: Dispatch<SetStateAction<CostTypes>>;
   costs: CostTypes[];
   setCosts: Dispatch<SetStateAction<CostTypes[]>>;
-  modalSourceMainForm: boolean;
-  setModalSourceMainForm: Dispatch<SetStateAction<boolean>>;
+  modalCostForm: boolean;
+  setModalCostForm: Dispatch<SetStateAction<boolean>>;
   handleRemove(id: string): void;
 }
 

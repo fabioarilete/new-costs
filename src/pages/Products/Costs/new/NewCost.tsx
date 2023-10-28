@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import * as S from './Style';
 import api from '../../../../api/api';
-import Container from '../../../../components/Container';
 import { CostTypes } from '../../types/CostTypes';
 import { useCosts } from '../../context/CostContext';
-import SourceMainForm from '../../CostForms/SourceMainForm';
+import HeaderForm from '../../CostForms/HeaderForm/HeaderForm';
 
 const inicialCostState: CostTypes = {
   cod: '',
@@ -43,9 +43,12 @@ const NewCost = () => {
   }
 
   return (
-    <Container>
-      <SourceMainForm cost={cost} setCost={setCost} handleSubmit={handleSubmit} />
-    </Container>
+    <S.Container>
+      <div className="containerTitle">
+        <h1 className="title">Cadastro de Produto</h1>
+      </div>
+      <HeaderForm cost={cost} setCost={setCost} handleSubmit={handleSubmit} />
+    </S.Container>
   );
 };
 

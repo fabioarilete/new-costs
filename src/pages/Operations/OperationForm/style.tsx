@@ -1,24 +1,26 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  z-index: 9999;
-  top: -140px;
-  bottom: -180px;
-  left: -450px;
+  z-index: 2000;
+  width: 100%;
+  height: 100%;
   right: 0;
-  position: absolute;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.6);
 `;
 
 export const Form = styled.form`
-  z-index: 9000;
-  width: 620px;
-  margin-top: -350px;
-  bottom: 10%;
-  padding: 15px;
+  z-index: 9999;
+  width: 660px;
+  height: 500px;
+  position: fixed;
+  padding-top: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;

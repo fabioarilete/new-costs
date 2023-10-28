@@ -5,7 +5,6 @@ import Container from '../../../components/Container';
 import { CostTypes } from '../types/CostTypes';
 import api from '../../../api/api';
 import CostsCard from '../CostCard/CostsCard';
-import SourceMainForm from '../CostForms/SourceMainForm';
 import NewCost from './new/NewCost';
 
 const inicialCostState: CostTypes = {
@@ -25,7 +24,7 @@ const Costs = () => {
   const [cost, setCost] = useState<CostTypes>(inicialCostState);
   const [costs, setCosts] = useState<any[]>([]);
   const [selectedCost, setSelectedCost] = useState<CostTypes | null>(null);
-  const [modalSourceMainForm, setModalSourceMainForm] = useState(false);
+  const [modalCostForm, setModalCostForm] = useState(false);
 
   useEffect(() => {
     api
@@ -36,8 +35,8 @@ const Costs = () => {
       .catch(err => console.log(err));
   }, []);
 
-  function openSourceMainForm() {
-    setModalSourceMainForm(true);
+  function openCostForm() {
+    setModalCostForm(true);
   }
 
   function handleRemove(id: string) {
@@ -58,21 +57,20 @@ const Costs = () => {
         setCost,
         costs,
         setCosts,
-        modalSourceMainForm,
-        setModalSourceMainForm,
+        modalCostForm,
+        setModalCostForm,
         handleRemove,
       }}
     >
-      <Container>
-        {modalSourceMainForm && <NewCost />}
-        {/* {selectedCost && <UpdateMaterial />} */}
-      </Container>
+      {modalCostForm && <NewCost />}
+      {/* {selectedCost && <UpdateMaterial />} */}
+
       <Container>
         <S.Header>
           <h1 className="title">Custos</h1>
-          <button className="btn" onClick={openSourceMainForm}>
-            Cadastrar Novo Custo
-          </button>
+          <a href="/newCost">
+            <button className="btn">Cadastrar Novo Custo</button>
+          </a>
         </S.Header>
 
         <S.ContainerCards>

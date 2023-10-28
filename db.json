@@ -1,5 +1,19 @@
 {
-  "products": [],
+  "products": [
+    {
+      "cod": "160",
+      "name": "VASSOURA BELLINHA",
+      "unid": "CX",
+      "qt": 12,
+      "st": "0",
+      "tipoProduto": "1",
+      "sf_st": "0",
+      "id": 1,
+      "materiaisProduto": [],
+      "operacoesProduto": [],
+      "total": 0
+    }
+  ],
   "materialsList": [
     {
       "id": 1,

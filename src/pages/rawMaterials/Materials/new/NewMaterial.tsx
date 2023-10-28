@@ -5,6 +5,7 @@ import Container from '../../../../components/Container';
 import { MaterialForm } from '../../MaterialForm/MaterialForm';
 import { useMaterialTotal } from '../hooks/useMaterialTotal';
 import { useMaterials } from '../../context/MaterialContext';
+import { Modal, ModalTarget } from '../../../../components/Modal/Modal';
 
 const inicialState: MaterialTypes = {
   id: '',
@@ -43,9 +44,11 @@ const NewMaterial = () => {
   }
 
   return (
-    <Container>
-      <MaterialForm material={material} setMaterial={setMaterial} handleSubmit={handleSubmit} />
-    </Container>
+    <Modal target={ModalTarget.MODAL}>
+      <Container>
+        <MaterialForm material={material} setMaterial={setMaterial} handleSubmit={handleSubmit} />
+      </Container>
+    </Modal>
   );
 };
 

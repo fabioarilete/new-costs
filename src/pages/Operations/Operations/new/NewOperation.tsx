@@ -5,6 +5,7 @@ import Container from '../../../../components/Container';
 import { OperationTypes } from '../../types/OperationTypes';
 import { useOperations } from '../../context/OperationContext';
 import { OperationForm } from '../../OperationForm/OperationForm';
+import { Modal, ModalTarget } from '../../../../components/Modal/Modal';
 
 const inicialState: OperationTypes = {
   id: '',
@@ -38,9 +39,11 @@ const NewOperation = () => {
   console.log(operation);
 
   return (
-    <Container>
-      <OperationForm operation={operation} setOperation={setOperation} handleSubmit={handleSubmit} />
-    </Container>
+    <Modal target={ModalTarget.MODAL}>
+      <Container>
+        <OperationForm operation={operation} setOperation={setOperation} handleSubmit={handleSubmit} />
+      </Container>
+    </Modal>
   );
 };
 
