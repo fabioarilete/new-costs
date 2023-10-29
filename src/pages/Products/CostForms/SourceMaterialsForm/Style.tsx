@@ -3,38 +3,23 @@ import styled from 'styled-components';
 export const Container = styled.div`
   width: 100%;
   display: flex;
-`;
+  flex-direction: column;
 
-export const Form = styled.form`
-  .cod {
-    width: 40px;
-  }
-
-  .qt {
-    width: 60px;
-  }
-
-  .unid {
-    width: 40px;
-  }
-
-  .name {
-    width: 200px;
-  }
-
-  .title {
-    font-size: 36px;
-    padding-left: 15px;
-    padding-right: 15px;
-    border-radius: 15px;
-    align-items: center;
-    background: rgb(64, 62, 62);
-    color: #ffbb33;
+  .form {
     margin: 10px;
+    padding: 10px;
+    width: 97%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px #000;
   }
 
   .btn {
-    width: 200px;
+    width: 40%;
     height: 35px;
     border-radius: 5px;
     margin-top: 20px;
@@ -45,7 +30,7 @@ export const Form = styled.form`
     transition: 0.5s;
     cursor: pointer;
     border: none;
-    font-size: 20px;
+    font-size: 14px;
     font-weight: bold;
   }
 
@@ -56,22 +41,28 @@ export const Form = styled.form`
     border: 2px solid rgb(64, 62, 62);
   }
 
+  .containerOptions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+  }
+
   .containerRadioButton {
-    margin-bottom: 15px;
     border-radius: 5px;
     background-color: #fff;
-    width: 300px;
-    height: 50px;
+    width: 70%;
+    height: 35px;
     display: flex;
     justify-content: space-around;
-    align-items: end;
     border: 1px solid rgb(64, 62, 62);
   }
 
   .radioButtonTitle {
-    margin-bottom: 2px;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
     color: #7b7b7b;
   }
 

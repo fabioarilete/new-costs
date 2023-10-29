@@ -24,7 +24,9 @@ const Costs = () => {
   const [cost, setCost] = useState<CostTypes>(inicialCostState);
   const [costs, setCosts] = useState<any[]>([]);
   const [selectedCost, setSelectedCost] = useState<CostTypes | null>(null);
-  const [modalCostForm, setModalCostForm] = useState(false);
+  const [headerForm, setHeaderForm] = useState(false);
+  const [sourceMaterialsForm, setSourceMaterialsForm] = useState(false);
+  const [sourceOperationsForm, setSourceOperationsForm] = useState(false);
 
   useEffect(() => {
     api
@@ -34,10 +36,6 @@ const Costs = () => {
       })
       .catch(err => console.log(err));
   }, []);
-
-  function openCostForm() {
-    setModalCostForm(true);
-  }
 
   function handleRemove(id: string) {
     api
@@ -57,12 +55,16 @@ const Costs = () => {
         setCost,
         costs,
         setCosts,
-        modalCostForm,
-        setModalCostForm,
+        headerForm,
+        setHeaderForm,
+        sourceMaterialsForm,
+        setSourceMaterialsForm,
+        sourceOperationsForm,
+        setSourceOperationsForm,
         handleRemove,
       }}
     >
-      {modalCostForm && <NewCost />}
+      {/* {modalCostForm && <NewCost />} */}
       {/* {selectedCost && <UpdateMaterial />} */}
 
       <Container>

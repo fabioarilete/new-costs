@@ -7,7 +7,7 @@ type InputProps = InputHTMLAttributes<HTMLSelectElement> & {
 
 export const SelectUnits: FC<InputProps> = ({ name, label, ...rest }) => {
   return (
-    <div>
+    <S.Select2>
       <S.Label htmlFor={name}>{label}</S.Label>
       <S.Select {...rest} name={name}>
         <option>Selecione uma opção</option>
@@ -23,6 +23,6 @@ export const SelectUnits: FC<InputProps> = ({ name, label, ...rest }) => {
         <option>M2</option>
         <option>M3</option>
       </S.Select>
-    </div>
+    </S.Select2>
   );
 };

@@ -1,15 +1,22 @@
 import { Dispatch, SetStateAction, createContext, useContext } from 'react';
 import { CostTypes } from '../types/CostTypes';
+import { SourceMaterialTypes } from '../CostForms/SourceMaterialsForm/types/SourceMaterialTypes';
 
 interface CostContextValue {
   selectedCost: CostTypes | null;
   setSelectedCost: Dispatch<SetStateAction<CostTypes | null>>;
   cost: CostTypes | null;
   setCost: Dispatch<SetStateAction<CostTypes>>;
+  materialProduto: SourceMaterialTypes[];
+  setMaterialProduto: Dispatch<SetStateAction<SourceMaterialTypes[]>>;
   costs: CostTypes[];
   setCosts: Dispatch<SetStateAction<CostTypes[]>>;
-  modalCostForm: boolean;
-  setModalCostForm: Dispatch<SetStateAction<boolean>>;
+  headerForm: boolean;
+  setHeaderForm: Dispatch<SetStateAction<boolean>>;
+  sourceMaterialsForm: boolean;
+  setSourceMaterialsForm: Dispatch<SetStateAction<boolean>>;
+  sourceOperationsForm: boolean;
+  setSourceOperationsForm: Dispatch<SetStateAction<boolean>>;
   handleRemove(id: string): void;
 }
 

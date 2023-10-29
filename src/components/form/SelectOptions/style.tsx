@@ -1,18 +1,26 @@
 import styled from 'styled-components';
 
-export const Select = styled.select`
+export const Select2 = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
+`;
+
+export const Select = styled.select`
+  background-color: #fff;
   width: 100%;
-  padding: 0.7em;
-  margin-bottom: 20px;
+  height: 40px;
+  padding: 10px;
+  justify-content: center;
+  margin-bottom: 10px;
   border-radius: 5px;
-  border: 0.5px solid #08a67c;
-  font-size: 18px;
+  border: 1px solid rgb(64, 62, 62);
+  font-size: 16px;
 
   &:focus {
-    outline: 1px solid #08a67c;
-    border-color: #08a67c;
+    outline: 1px solid rgb(64, 62, 62);
+    border-color: rgb(64, 62, 62);
+    background-color: #d6f0f1;
   }
 
   &::placeholder {
@@ -21,8 +29,7 @@ export const Select = styled.select`
 `;
 
 export const Label = styled.label`
-  margin-bottom: 2px;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 16px;
   color: #7b7b7b;
 `;

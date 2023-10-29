@@ -13,7 +13,7 @@ interface CostFormProps {
 }
 
 const HeaderForm = ({ cost, setCost, handleSubmit }: CostFormProps) => {
-  const { selectedCost, setSelectedCost, setModalCostForm } = useCosts();
+  const { selectedCost, setSelectedCost, setHeaderForm, setSourceMaterialsForm } = useCosts();
   useEffect(() => {
     if (!selectedCost) {
       return;
@@ -33,156 +33,161 @@ const HeaderForm = ({ cost, setCost, handleSubmit }: CostFormProps) => {
       setSelectedCost(null);
     }
 
-    setModalCostForm(false);
+    setHeaderForm(false);
+  }
+
+  function openSourceMaterialForm() {
+    setHeaderForm(false);
+    setSourceMaterialsForm(true);
   }
 
   return (
     <S.Container>
-      <S.Form onSubmit={_handleSubmit}>
-        <div className="containerHeader">
-          <Input
-            className="cod"
-            type="text"
-            label="Cód"
-            name="cod"
-            placeholder="Informe o código do produto"
-            value={cost.cod}
-            onChange={event =>
-              setCost({
-                ...cost,
-                cod: event.currentTarget.value,
-              })
-            }
-          />
-          <Input
-            className="name"
-            type="text"
-            label="Produto"
-            name="name"
-            placeholder="Descreva o produto"
-            value={cost.name}
-            onChange={event =>
-              setCost({
-                ...cost,
-                name: event.currentTarget.value.toUpperCase(),
-              })
-            }
-          />
+      <form className="form" onSubmit={_handleSubmit}>
+        <h1>Informações iniciais</h1>
+        <Input
+          type="text"
+          label="Cód"
+          name="cod"
+          placeholder="Informe o código do produto"
+          value={cost.cod}
+          onChange={event =>
+            setCost({
+              ...cost,
+              cod: event.currentTarget.value,
+            })
+          }
+        />
+        <Input
+          type="text"
+          label="Produto"
+          name="name"
+          placeholder="Descreva o produto"
+          value={cost.name}
+          onChange={event =>
+            setCost({
+              ...cost,
+              name: event.currentTarget.value.toUpperCase(),
+            })
+          }
+        />
+        <SelectUnits
+          label="Unid"
+          name="unid"
+          value={cost.unid}
+          onChange={event =>
+            setCost({
+              ...cost,
+              unid: event.currentTarget.value,
+            })
+          }
+        />
 
-          <SelectUnits
-            className="unid"
-            label="Unid"
-            name="unid"
-            value={cost.unid}
-            onChange={event =>
-              setCost({
-                ...cost,
-                unid: event.currentTarget.value,
-              })
-            }
-          />
-
-          <Input
-            className="qt"
-            type="number"
-            label="Qt Emb"
-            name="qt"
-            placeholder="Informe a quantidade na embalagem"
-            value={cost.qt}
-            onChange={event =>
-              setCost({
-                ...cost,
-                qt: parseInt(event.target.value),
-              })
-            }
-          />
-        </div>
-        <div className="configuration">
-          <div className="containerOptions">
-            <label className="radioButtonTitle">Tipo de produto</label>
-            <div className="containerRadioButton">
-              <RadioButton
-                name="tipoProduto"
-                label="Produzido"
-                value={1}
-                onChange={event =>
-                  setCost({
-                    ...cost,
-                    tipoProduto: event.target.value,
-                  })
-                }
-              />
-              <RadioButton
-                name="tipoProduto"
-                label="Revenda"
-                value={0}
-                onChange={event =>
-                  setCost({
-                    ...cost,
-                    tipoProduto: event.target.value,
-                  })
-                }
-              />
-            </div>
-          </div>
-
-          <div className="containerOptions">
-            <label className="radioButtonTitle">Substituição Tributária</label>
-            <div className="containerRadioButton">
-              <RadioButton
-                name="st"
-                label="Sim"
-                value={1}
-                onChange={event =>
-                  setCost({
-                    ...cost,
-                    st: event.target.value,
-                  })
-                }
-              />
-              <RadioButton
-                name="st"
-                label="Não"
-                value={0}
-                onChange={event =>
-                  setCost({
-                    ...cost,
-                    st: event.target.value,
-                  })
-                }
-              />
-            </div>
-          </div>
-
-          <div className="containerOptions">
-            <label className="radioButtonTitle">São Francisco x Santa Tereza</label>
-            <div className="containerRadioButton">
-              <RadioButton
-                name="sf_st"
-                label="Sim"
-                value={1}
-                onChange={event =>
-                  setCost({
-                    ...cost,
-                    sf_st: event.target.value,
-                  })
-                }
-              />
-              <RadioButton
-                name="sf_st"
-                label="Não"
-                value={0}
-                onChange={event =>
-                  setCost({
-                    ...cost,
-                    sf_st: event.target.value,
-                  })
-                }
-              />
-            </div>
+        <Input
+          type="number"
+          label="Qt Emb"
+          name="qt"
+          placeholder="Informe a quantidade na embalagem"
+          value={cost.qt}
+          onChange={event =>
+            setCost({
+              ...cost,
+              qt: parseInt(event.target.value),
+            })
+          }
+        />
+        <div className="containerOptions">
+          <label className="radioButtonTitle">Tipo de produto</label>
+          <div className="containerRadioButton">
+            <RadioButton
+              name="tipoProduto"
+              label="Produzido"
+              value={1}
+              onChange={event =>
+                setCost({
+                  ...cost,
+                  tipoProduto: event.target.value,
+                })
+              }
+            />
+            <RadioButton
+              name="tipoProduto"
+              label="Revenda"
+              value={0}
+              onChange={event =>
+                setCost({
+                  ...cost,
+                  tipoProduto: event.target.value,
+                })
+              }
+            />
           </div>
         </div>
-      </S.Form>
+
+        <div className="containerOptions">
+          <label className="radioButtonTitle">Substituição Tributária</label>
+          <div className="containerRadioButton">
+            <RadioButton
+              name="st"
+              label="Sim"
+              value={1}
+              onChange={event =>
+                setCost({
+                  ...cost,
+                  st: event.target.value,
+                })
+              }
+            />
+            <RadioButton
+              name="st"
+              label="Não"
+              value={0}
+              onChange={event =>
+                setCost({
+                  ...cost,
+                  st: event.target.value,
+                })
+              }
+            />
+          </div>
+        </div>
+
+        <div className="containerOptions">
+          <label className="radioButtonTitle">São Francisco x Santa Tereza</label>
+          <div className="containerRadioButton">
+            <RadioButton
+              name="sf_st"
+              label="Sim"
+              value={1}
+              onChange={event =>
+                setCost({
+                  ...cost,
+                  sf_st: event.target.value,
+                })
+              }
+            />
+            <RadioButton
+              name="sf_st"
+              label="Não"
+              value={0}
+              onChange={event =>
+                setCost({
+                  ...cost,
+                  sf_st: event.target.value,
+                })
+              }
+            />
+          </div>
+        </div>
+        <div className="containerButtons">
+          <button className="btn" type="button" onClick={openSourceMaterialForm}>
+            Adicionar Materiais
+          </button>
+          <button className="btn" type="button" onClick={handleClose}>
+            Cancelar
+          </button>
+        </div>
+      </form>
     </S.Container>
   );
 };

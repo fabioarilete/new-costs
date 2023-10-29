@@ -8,10 +8,10 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ type = 'text', name = '', label = '', ...props }, ref) => {
     return (
-      <div>
-        <S.Label htmlFor={name}>{label}</S.Label>
-        <S.Input type={type} name={name} ref={ref} {...props} />
-      </div>
+      <S.Input>
+        <label htmlFor={name}>{label}</label>
+        <input type={type} name={name} ref={ref} {...props} />
+      </S.Input>
     );
   },
 );

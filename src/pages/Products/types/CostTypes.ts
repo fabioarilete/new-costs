@@ -7,6 +7,7 @@ export interface CostTypes {
   tipoProduto: string;
   sf_st: string;
   id: string;
+  obs?: string;
   materiaisProduto: Array<[]>;
   operacoesProduto: Array<[]>;
 }

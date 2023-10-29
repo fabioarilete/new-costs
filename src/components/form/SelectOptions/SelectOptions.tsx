@@ -8,12 +8,12 @@ interface SelectoptionsProps extends SelectHTMLAttributes<HTMLSelectElement> {
 
 const SelectOptions: React.FC<SelectoptionsProps> = ({ value, name, label, children, ...rest }) => {
   return (
-    <>
+    <S.Select2>
       <S.Label htmlFor={name}>{label}</S.Label>
       <S.Select {...rest} id={name} value={value || ''} name={name}>
         {children}
       </S.Select>
-    </>
+    </S.Select2>
   );
 };
 
