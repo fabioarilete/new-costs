@@ -1,11 +1,9 @@
 import * as S from './style';
 import React, { useEffect, useState } from 'react';
-import { CostProvider } from '../context/CostContext';
 import Container from '../../../components/Container';
 import { CostTypes } from '../types/CostTypes';
 import api from '../../../api/api';
-import CostsCard from '../CostCard/CostsCard';
-import NewCost from './new/NewCost';
+import { Link } from 'react-router-dom';
 
 const inicialCostState: CostTypes = {
   cod: '',
@@ -24,9 +22,6 @@ const Costs = () => {
   const [cost, setCost] = useState<CostTypes>(inicialCostState);
   const [costs, setCosts] = useState<any[]>([]);
   const [selectedCost, setSelectedCost] = useState<CostTypes | null>(null);
-  const [headerForm, setHeaderForm] = useState(false);
-  const [sourceMaterialsForm, setSourceMaterialsForm] = useState(false);
-  const [sourceOperationsForm, setSourceOperationsForm] = useState(false);
 
   useEffect(() => {
     api
@@ -47,41 +42,20 @@ const Costs = () => {
   }
 
   return (
-    <CostProvider
-      value={{
-        selectedCost,
-        setSelectedCost,
-        cost,
-        setCost,
-        costs,
-        setCosts,
-        headerForm,
-        setHeaderForm,
-        sourceMaterialsForm,
-        setSourceMaterialsForm,
-        sourceOperationsForm,
-        setSourceOperationsForm,
-        handleRemove,
-      }}
-    >
-      {/* {modalCostForm && <NewCost />} */}
-      {/* {selectedCost && <UpdateMaterial />} */}
+    <Container>
+      <S.Header>
+        <h1 className="title">Custos</h1>
+        <Link to="/newCost">
+          <button className="btn">Cadastrar Novo Custo</button>
+        </Link>
+      </S.Header>
 
-      <Container>
-        <S.Header>
-          <h1 className="title">Custos</h1>
-          <a href="/newCost">
-            <button className="btn">Cadastrar Novo Custo</button>
-          </a>
-        </S.Header>
-
-        <S.ContainerCards>
-          {/* {costs.map(cost => (
+      <S.ContainerCards>
+        {/* {costs.map(cost => (
             <CostsCard cost={cost} handleRemove={handleRemove} key={cost.id} />
           ))} */}
-        </S.ContainerCards>
-      </Container>
-    </CostProvider>
+      </S.ContainerCards>
+    </Container>
   );
 };
 

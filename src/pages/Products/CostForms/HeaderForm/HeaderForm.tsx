@@ -1,7 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect } from 'react';
 import * as S from './Style';
 import { CostTypes } from '../../types/CostTypes';
-import { useCosts } from '../../context/CostContext';
 import { Input } from '../../../../components/form/Input';
 import { SelectUnits } from '../../../../components/form/SelectUnits';
 import { RadioButton } from '../../../../components/form/RadioButton';
@@ -9,41 +8,20 @@ import { RadioButton } from '../../../../components/form/RadioButton';
 interface CostFormProps {
   cost: CostTypes;
   setCost: Dispatch<SetStateAction<CostTypes>>;
-  handleSubmit(cost: CostTypes): void;
+  handleValidation(cost: CostTypes): void;
+  handleNextStep(step?: number): void;
 }
 
-const HeaderForm = ({ cost, setCost, handleSubmit }: CostFormProps) => {
-  const { selectedCost, setSelectedCost, setHeaderForm, setSourceMaterialsForm } = useCosts();
-  useEffect(() => {
-    if (!selectedCost) {
-      return;
-    }
+const HeaderForm = ({ cost, setCost, handleValidation, handleNextStep }: CostFormProps) => {
+  function _handleValidation(event: React.FormEvent<HTMLFormElement>) {}
 
-    setCost(selectedCost);
-  }, [setCost, selectedCost]);
+  function handleClose() {}
 
-  function _handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    handleSubmit({ ...cost });
-    handleClose();
-  }
-
-  function handleClose() {
-    if (selectedCost) {
-      setSelectedCost(null);
-    }
-
-    setHeaderForm(false);
-  }
-
-  function openSourceMaterialForm() {
-    setHeaderForm(false);
-    setSourceMaterialsForm(true);
-  }
+  function openSourceMaterialForm() {}
 
   return (
     <S.Container>
-      <form className="form" onSubmit={_handleSubmit}>
+      <form className="form" onSubmit={_handleValidation}>
         <h1>Informações iniciais</h1>
         <Input
           type="text"
@@ -92,7 +70,7 @@ const HeaderForm = ({ cost, setCost, handleSubmit }: CostFormProps) => {
           onChange={event =>
             setCost({
               ...cost,
-              qt: parseInt(event.target.value),
+              qt: event.target.value,
             })
           }
         />
@@ -180,7 +158,7 @@ const HeaderForm = ({ cost, setCost, handleSubmit }: CostFormProps) => {
           </div>
         </div>
         <div className="containerButtons">
-          <button className="btn" type="button" onClick={openSourceMaterialForm}>
+          <button className="btn" type="button" onClick={() => handleNextStep()}>
             Adicionar Materiais
           </button>
           <button className="btn" type="button" onClick={handleClose}>

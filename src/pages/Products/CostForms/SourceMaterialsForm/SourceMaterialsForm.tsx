@@ -1,21 +1,23 @@
-import React, { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
 import * as S from './Style';
-import { useCosts } from '../../context/CostContext';
 import { Input } from '../../../../components/form/Input';
 import SelectOptions from '../../../../components/form/SelectOptions/SelectOptions';
 import api from '../../../../api/api';
-import { SourceMaterialTypes } from './types/SourceMaterialTypes';
 import { MaterialTypes } from '../../../rawMaterials/types/MaterialTypes';
+import { CostMaterial, CostTypes } from '../../types/CostTypes';
 
-interface SourceMaterialForm {
-  handleSubmit(materialProduto: SourceMaterialTypes): void;
-  materialProduto: SourceMaterialTypes;
-  setMaterialProduto: Dispatch<SetStateAction<SourceMaterialTypes>>;
+interface CostTypesForm {
+  cost: CostTypes;
+  setCost: Dispatch<SetStateAction<CostTypes>>;
+  handleValidation(cost: CostTypes): void;
+  handleNextStep(step?: number): void;
 }
 
-const SourceMaterialsForm = ({ materialProduto, setMaterialProduto, handleSubmit }: SourceMaterialForm) => {
-  const { setHeaderForm } = useCosts();
+const SourceMaterialsForm = ({ cost, setCost, handleNextStep, handleValidation }: CostTypesForm) => {
   const [materials, setMaterials] = useState<MaterialTypes[]>([]);
+  const [selectedMaterialId, setSelectMaterialId] = useState<string>();
+  const [qt, setQt] = useState('');
+  const [obs, setObs] = useState('');
 
   useEffect(() => {
     api
@@ -26,26 +28,52 @@ const SourceMaterialsForm = ({ materialProduto, setMaterialProduto, handleSubmit
       .catch(err => console.log(err));
   }, []);
 
-  function _handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    handleSubmit({ ...materialProduto });
-    handleClose();
-  }
+  const selectedMaterial = useMemo((): MaterialTypes | null => {
+    const material = materials.find(item => item.id === selectedMaterialId);
+    console.log(selectedMaterialId);
+    console.log(material);
+    console.log(materials);
 
-  function handleChange(e: ChangeEvent<HTMLSelectElement>) {
-    setMaterials({ ...materials, [e.target.name]: e.target.value });
-  }
+    if (!material) {
+      return null;
+    }
 
-  function handleClose() {
-    setHeaderForm(false);
+    return material;
+  }, [selectedMaterialId, materials]);
+  console.log(selectedMaterial);
+
+  function handleClose() {}
+
+  function handleSubmit() {
+    if (!selectedMaterial) {
+      return;
+    }
+
+    const totalItemMaterial = parseInt(qt) * selectedMaterial.total;
+
+    const data: CostMaterial = {
+      ...selectedMaterial,
+      totalItemMaterial,
+      qt,
+      obs,
+    };
+
+    setCost(state => ({
+      ...state,
+      materiaisProduto: [...state.materiaisProduto, data],
+    }));
   }
 
   return (
     <S.Container>
-      <form className="form" onSubmit={_handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         <h1>Adição de Materiais</h1>
 
-        <SelectOptions onChange={handleChange} label="Matéria-prima">
+        <SelectOptions
+          value={selectedMaterialId}
+          onChange={event => setSelectMaterialId(event.target.value)}
+          label="Matéria-prima"
+        >
           {materials.map(item => (
             <option value={item.id} key={item.id}>
               {item.name}
@@ -58,13 +86,8 @@ const SourceMaterialsForm = ({ materialProduto, setMaterialProduto, handleSubmit
           label="Observação"
           name="obs"
           placeholder="Faça uma Observação"
-          value={materialProduto.obs}
-          onChange={event =>
-            setMaterialProduto({
-              ...materialProduto,
-              obs: event.currentTarget.value,
-            })
-          }
+          value={obs}
+          onChange={event => setObs(event.target.value)}
         />
 
         <Input
@@ -72,17 +95,12 @@ const SourceMaterialsForm = ({ materialProduto, setMaterialProduto, handleSubmit
           label="Quantidade"
           name="qt"
           placeholder="Informe a quantidade"
-          value={materialProduto.qt}
-          onChange={event =>
-            setMaterialProduto({
-              ...materialProduto,
-              qt: parseInt(event.target.value),
-            })
-          }
+          value={qt}
+          onChange={event => setQt(event.target.value)}
         />
 
         <div className="containerButtons">
-          <button className="btn" type="submit">
+          <button className="btn" type="submit" onClick={handleSubmit}>
             Cadastrar Material
           </button>
           <button className="btn" type="button" onClick={handleClose}>

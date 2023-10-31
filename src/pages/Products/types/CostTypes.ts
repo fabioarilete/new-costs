@@ -1,13 +1,21 @@
+import { OperationTypes } from '../../Operations/types/OperationTypes';
+import { MaterialTypes } from '../../rawMaterials/types/MaterialTypes';
+
+export interface CostMaterial extends MaterialTypes {
+  totalItemMaterial: number;
+  obs: string;
+  qt: string;
+}
+
 export interface CostTypes {
   cod: string;
   name: string;
   unid: string;
-  qt: number;
+  qt: string;
   st: string;
   tipoProduto: string;
   sf_st: string;
   id: string;
-  obs?: string;
-  materiaisProduto: Array<[]>;
-  operacoesProduto: Array<[]>;
+  materiaisProduto: CostMaterial[];
+  operacoesProduto: OperationTypes[];
 }
