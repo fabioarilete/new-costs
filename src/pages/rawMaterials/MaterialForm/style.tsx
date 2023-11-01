@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   z-index: 2000;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   right: 0;
   left: 0;
   top: 0;
@@ -14,22 +14,20 @@ export const Container = styled.div`
 
 export const Form = styled.form`
   overflow-y: scroll;
-  z-index: 9999;
-  width: 660px;
-  height: 700px;
-  position: fixed;
-  padding-top: 150px;
-  padding-bottom: 20px;
-  top: 50%;
-  left: 50%;
+  margin: 10px;
+  padding: 10px;
+  margin-left: 50%;
+  margin-top: 25%;
   transform: translate(-50%, -50%);
+  width: 40%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 2px 2px 5px black;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px #000;
 
   .title {
     font-size: 36px;

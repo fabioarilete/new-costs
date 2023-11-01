@@ -15,10 +15,6 @@ interface CostFormProps {
 const HeaderForm = ({ cost, setCost, handleValidation, handleNextStep }: CostFormProps) => {
   function _handleValidation(event: React.FormEvent<HTMLFormElement>) {}
 
-  function handleClose() {}
-
-  function openSourceMaterialForm() {}
-
   return (
     <S.Container>
       <form className="form" onSubmit={_handleValidation}>
@@ -160,9 +156,6 @@ const HeaderForm = ({ cost, setCost, handleValidation, handleNextStep }: CostFor
         <div className="containerButtons">
           <button className="btn" type="button" onClick={() => handleNextStep()}>
             Adicionar Materiais
-          </button>
-          <button className="btn" type="button" onClick={handleClose}>
-            Cancelar
           </button>
         </div>
       </form>

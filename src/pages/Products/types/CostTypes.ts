@@ -5,6 +5,16 @@ export interface CostMaterial extends MaterialTypes {
   totalItemMaterial: number;
   obs: string;
   qt: string;
+  id: number;
+}
+
+export interface CostOperation extends OperationTypes {
+  totalItemOperation: number;
+  obs: string;
+  qt: string;
+  cav: string;
+  ciclo: string;
+  id: number;
 }
 
 export interface CostTypes {
@@ -15,7 +25,7 @@ export interface CostTypes {
   st: string;
   tipoProduto: string;
   sf_st: string;
-  id: string;
+  id: number;
   materiaisProduto: CostMaterial[];
-  operacoesProduto: OperationTypes[];
+  operacoesProduto: CostOperation[];
 }

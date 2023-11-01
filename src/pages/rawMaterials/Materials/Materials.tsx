@@ -10,7 +10,7 @@ import { MaterialCard } from '../MaterialCard/MaterialCard';
 import UpdateMaterial from './update/UpdateMaterial';
 
 const inicialState: MaterialTypes = {
-  id: '',
+  id: '' as any,
   name: '',
   preco: '' as any,
   frete: '' as any,
@@ -46,7 +46,7 @@ const Materials = () => {
     setModalNewMaterial(true);
   }
 
-  function handleRemove(id: string) {
+  function handleRemove(id: number) {
     api
       .delete(`materialsList/${id}`)
       .then(() => {

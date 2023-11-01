@@ -34,14 +34,20 @@ export const Header = styled.div`
   .td {
     font-weight: bold;
   }
+
   .name {
     text-align: center;
     width: 45%;
   }
 
+  .tipo {
+    text-align: center;
+    width: 15%;
+  }
+
   .valor {
     text-align: center;
-    width: 25%;
+    width: 20%;
   }
 
   .head {

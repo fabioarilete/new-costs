@@ -11,10 +11,11 @@ import NewOperation from './new/NewOperation';
 import UpdateOperation from './update/UpdateOperation';
 
 const inicialState: OperationTypes = {
-  id: '',
+  id: '' as any,
   name: '',
   valor: '' as any,
   unid: '',
+  tipoOperation: '',
 };
 
 const Operations = () => {
@@ -42,7 +43,7 @@ const Operations = () => {
     setModalNewOperation(true);
   }
 
-  function handleRemove(id: string) {
+  function handleRemove(id: number) {
     api
       .delete(`operationsList/${id}`)
       .then(() => {
@@ -76,6 +77,7 @@ const Operations = () => {
 
           <div className="headerOperations">
             <div className="td name">Descrição da Operação</div>
+            <div className="td tipo">Tipo</div>
             <div className="td valor">Valor da Operação</div>
             <div className="td actions">Ações</div>
           </div>

@@ -1,30 +1,31 @@
-import { CostTypes } from '../../../types/CostTypes';
+import formatCurrency from '../../../../../utils/formatCurrency';
+import { CostMaterial } from '../../../types/CostTypes';
 import * as S from './Style';
 type Props = {
   handleRemove(id: string): void;
-  material: CostTypes;
+  material: CostMaterial;
 };
 
 const ItemMaterial = ({ material, handleRemove }: Props) => {
   return (
     <S.Container>
       <div className="material">
-        <p>Matéria-Prima</p>
+        <p>{material.name}</p>
       </div>
       <div className="obsMaterial">
-        <p>obs</p>
+        <p>{material.obs}</p>
       </div>
       <div className="qtMaterial">
-        <p>Quant</p>
+        <p>{material.qt}</p>
       </div>
       <div className="unitMaterial">
-        <p>Unid</p>
+        <p>{material.unid}</p>
       </div>
       <div className="valueMaterial">
-        <p>Valor Unitário</p>
+        <p>{formatCurrency(material.total, 'BRL')}</p>
       </div>
       <div className="totalMaterial">
-        <p>Valor Total</p>
+        <p>{formatCurrency(material.totalItemMaterial, 'BRL')}</p>
       </div>
     </S.Container>
   );

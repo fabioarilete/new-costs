@@ -7,7 +7,7 @@ import { useMaterials } from '../../context/MaterialContext';
 import { useMaterialTotal } from '../hooks/useMaterialTotal';
 
 const inicialState: MaterialTypes = {
-  id: '',
+  id: '' as any,
   name: '',
   preco: '' as any,
   frete: '' as any,

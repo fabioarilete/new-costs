@@ -5,7 +5,7 @@ import * as S from './style';
 import { BsPencil, BsFillTrashFill } from 'react-icons/bs';
 
 type Props = {
-  handleRemove(id: string): void;
+  handleRemove(id: number): void;
   operation: OperationTypes;
 };
 
@@ -24,6 +24,7 @@ const OperationCard = ({ operation, handleRemove }: Props) => {
       <tbody>
         <tr>
           <td className="td name">{operation.name}</td>
+          <td className="td tipo">{operation.tipoOperation === '1' ? 'Comum' : 'Injeção'}</td>
           <td className="td inicialPrice">
             {formatCurrency(operation.valor, 'BRL')} {operation.unid}
           </td>

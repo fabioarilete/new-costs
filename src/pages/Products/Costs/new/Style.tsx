@@ -120,6 +120,7 @@ export const Container = styled.div`
   }
 
   .headerT {
+    text-align: center !important;
     background-color: #262323;
     color: #ffbb33;
   }
@@ -154,6 +155,8 @@ export const Container = styled.div`
     border-bottom: 0.5px solid grey;
     border-right: 0.5px solid #c0b7b7;
     text-align: center;
+    text-align: start;
+    padding-right: 5px;
   }
 
   .obsMaterial {
@@ -181,13 +184,38 @@ export const Container = styled.div`
     width: 16%;
     border-bottom: 0.5px solid grey;
     border-right: 0.5px solid #c0b7b7;
-    text-align: center;
+    text-align: end;
+    padding-right: 5px;
   }
 
   .totalMaterial {
     width: 16%;
     border-bottom: 0.5px solid grey;
     border-right: 0.5px solid #c0b7b7;
-    text-align: center;
+    text-align: end;
+    padding-right: 5px;
+  }
+
+  .subtotals {
+    width: 100%;
+    display: flex;
+  }
+
+  .totalTitle {
+    width: 80%;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: end;
+    padding-right: 5px;
+    background-color: #262323;
+    color: #ffbb33;
+  }
+
+  .total {
+    width: 20%;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: end;
+    padding-right: 5px;
   }
 `;

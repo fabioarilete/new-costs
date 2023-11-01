@@ -13,21 +13,19 @@ export const Container = styled.div`
 `;
 
 export const Form = styled.form`
-  z-index: 9999;
-  width: 660px;
-  height: 500px;
-  position: fixed;
-  padding-top: 0;
-  top: 50%;
-  left: 50%;
+  margin: 10px;
+  padding: 10px;
+  margin-left: 50%;
+  margin-top: 25%;
   transform: translate(-50%, -50%);
+  width: 40%;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 2px 2px 5px black;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px #000;
 
   .title {
     font-size: 36px;

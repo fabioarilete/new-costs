@@ -4,6 +4,7 @@ import { Input } from '../../../components/form/Input';
 import { SelectUnits } from '../../../components/form/SelectUnits';
 import { useOperations } from '../context/OperationContext';
 import { OperationTypes } from '../types/OperationTypes';
+import { RadioButton } from '../../../components/form/RadioButton';
 
 interface FormOperationsProps {
   operation: OperationTypes;
@@ -79,6 +80,32 @@ export const OperationForm = ({ operation, setOperation, handleSubmit }: FormOpe
             })
           }
         />
+
+        <label className="radioButtonTitle">Tipo de Operação</label>
+        <div className="containerRadioButton">
+          <RadioButton
+            name="tipoOperation"
+            label="Comum"
+            value={1}
+            onChange={event =>
+              setOperation({
+                ...operation,
+                tipoOperation: event.target.value,
+              })
+            }
+          />
+          <RadioButton
+            name="tipoOperation"
+            label="Injeção"
+            value={0}
+            onChange={event =>
+              setOperation({
+                ...operation,
+                tipoOperation: event.target.value,
+              })
+            }
+          />
+        </div>
 
         <div className="containerButtons">
           <button className="btn" type="submit">

@@ -7,6 +7,7 @@ interface CostContextValue {
   cost: CostTypes | null;
   setCost: Dispatch<SetStateAction<CostTypes>>;
   handleNextStep: () => void;
+  handleLastStep: () => void;
 }
 
 const CostContext = createContext<CostContextValue>({} as CostContextValue);

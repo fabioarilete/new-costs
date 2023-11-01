@@ -8,10 +8,11 @@ import { OperationForm } from '../../OperationForm/OperationForm';
 import { Modal, ModalTarget } from '../../../../components/Modal/Modal';
 
 const inicialState: OperationTypes = {
-  id: '',
+  id: '' as any,
   name: '',
   valor: '' as any,
   unid: '',
+  tipoOperation: '',
 };
 
 const NewOperation = () => {

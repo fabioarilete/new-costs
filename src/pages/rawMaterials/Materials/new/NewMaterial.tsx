@@ -8,7 +8,7 @@ import { useMaterials } from '../../context/MaterialContext';
 import { Modal, ModalTarget } from '../../../../components/Modal/Modal';
 
 const inicialState: MaterialTypes = {
-  id: '',
+  id: '' as any,
   name: '',
   preco: '' as any,
   frete: '' as any,

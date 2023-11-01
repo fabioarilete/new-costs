@@ -1,19 +1,21 @@
-import { ChangeEvent, Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
 import * as S from './Style';
 import { Input } from '../../../../components/form/Input';
 import SelectOptions from '../../../../components/form/SelectOptions/SelectOptions';
 import api from '../../../../api/api';
 import { MaterialTypes } from '../../../rawMaterials/types/MaterialTypes';
 import { CostMaterial, CostTypes } from '../../types/CostTypes';
+import formatCurrency from '../../../../utils/formatCurrency';
 
 interface CostTypesForm {
   cost: CostTypes;
   setCost: Dispatch<SetStateAction<CostTypes>>;
   handleValidation(cost: CostTypes): void;
   handleNextStep(step?: number): void;
+  handleLastStep(step?: number): void;
 }
 
-const SourceMaterialsForm = ({ cost, setCost, handleNextStep, handleValidation }: CostTypesForm) => {
+const SourceMaterialsForm = ({ cost, setCost, handleNextStep, handleLastStep, handleValidation }: CostTypesForm) => {
   const [materials, setMaterials] = useState<MaterialTypes[]>([]);
   const [selectedMaterialId, setSelectMaterialId] = useState<string>();
   const [qt, setQt] = useState('');
@@ -29,10 +31,11 @@ const SourceMaterialsForm = ({ cost, setCost, handleNextStep, handleValidation }
   }, []);
 
   const selectedMaterial = useMemo((): MaterialTypes | null => {
-    const material = materials.find(item => item.id === selectedMaterialId);
-    console.log(selectedMaterialId);
-    console.log(material);
-    console.log(materials);
+    if (!selectedMaterialId) {
+      return null;
+    }
+
+    const material = materials.find(item => item.id === parseInt(selectedMaterialId));
 
     if (!material) {
       return null;
@@ -40,11 +43,11 @@ const SourceMaterialsForm = ({ cost, setCost, handleNextStep, handleValidation }
 
     return material;
   }, [selectedMaterialId, materials]);
-  console.log(selectedMaterial);
 
   function handleClose() {}
 
-  function handleSubmit() {
+  function handleSubmit(e: any) {
+    e.preventDefault();
     if (!selectedMaterial) {
       return;
     }
@@ -62,6 +65,8 @@ const SourceMaterialsForm = ({ cost, setCost, handleNextStep, handleValidation }
       ...state,
       materiaisProduto: [...state.materiaisProduto, data],
     }));
+    setObs('');
+    setQt('');
   }
 
   return (
@@ -80,6 +85,10 @@ const SourceMaterialsForm = ({ cost, setCost, handleNextStep, handleValidation }
             </option>
           ))}
         </SelectOptions>
+        <div className="informations">
+          <p>Preço do {selectedMaterial && selectedMaterial.unid}......</p>
+          {selectedMaterial && formatCurrency(selectedMaterial.total, 'BRL')}
+        </div>
 
         <Input
           type="text"
@@ -100,11 +109,14 @@ const SourceMaterialsForm = ({ cost, setCost, handleNextStep, handleValidation }
         />
 
         <div className="containerButtons">
-          <button className="btn" type="submit" onClick={handleSubmit}>
-            Cadastrar Material
+          <button className="btn" type="button" onClick={() => handleLastStep()}>
+            Voltar
           </button>
-          <button className="btn" type="button" onClick={handleClose}>
-            Cancelar
+          <button className="btn" type="submit" onClick={handleSubmit}>
+            Adiconar mais Material
+          </button>
+          <button className="btn" type="button" onClick={() => handleNextStep()}>
+            Adicionar Operações
           </button>
         </div>
       </form>

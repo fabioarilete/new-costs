@@ -13,7 +13,7 @@ const inicialCostState: CostTypes = {
   st: '',
   tipoProduto: '',
   sf_st: '',
-  id: '',
+  id: '' as any,
   materiaisProduto: [],
   operacoesProduto: [],
 };

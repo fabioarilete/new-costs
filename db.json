@@ -142,73 +142,85 @@
       "id": 1,
       "name": "MONTAGEM",
       "valor": 44,
-      "unid": "HR"
+      "unid": "HR",
+      "tipoOperation": "1"
     },
     {
       "id": 2,
       "name": "EMBALAGEM",
       "valor": 44,
-      "unid": "HR"
+      "unid": "HR",
+      "tipoOperation": "1"
     },
     {
       "id": 3,
       "name": "COLAGEM DE ESPUMA",
       "valor": 44,
-      "unid": "HR"
+      "unid": "HR",
+      "tipoOperation": "1"
     },
     {
       "id": 4,
       "name": "INJETORA",
       "valor": 100,
-      "unid": "HR"
+      "unid": "HR",
+      "tipoOperation": "0"
     },
     {
       "id": 5,
       "name": "TUFAGEM SIMPLES - BELLINHA E ETC",
       "valor": 5,
-      "unid": "DZ"
+      "unid": "DZ",
+      "tipoOperation": "1"
     },
     {
       "id": 6,
       "name": "TUFAGEM ESCOVA SANITÁRIA",
       "valor": 6.6,
-      "unid": "DZ"
+      "unid": "DZ",
+      "tipoOperation": "1"
     },
     {
       "id": 7,
       "name": "TUFAGEM ESCOVA LAVA COSTA",
       "valor": 6,
-      "unid": "DZ"
+      "unid": "DZ",
+      "tipoOperation": "1"
     },
     {
       "id": 8,
       "name": "TUFAGEM BRUXINHA",
       "valor": 4.4,
-      "unid": "DZ"
+      "unid": "DZ",
+      "tipoOperation": "1"
     },
     {
       "id": 9,
       "name": "TUFAGEM ESCOVA OVAL",
       "valor": 3.9,
-      "unid": "DZ"
+      "unid": "DZ",
+      "tipoOperation": "1"
     },
     {
       "id": 10,
       "name": "TUFAGEM SUPERBELLA",
       "valor": 6.6,
-      "unid": "DZ"
+      "unid": "DZ",
+      "tipoOperation": "1"
     },
     {
       "id": 11,
       "name": "TUFAGEM PELO BOLA",
       "valor": 38.5,
-      "unid": "DZ"
+      "unid": "DZ",
+      "tipoOperation": "1"
     },
     {
       "id": 12,
       "name": "PINTURA DE PÁ",
       "valor": 13.8,
-      "unid": "DZ"
+      "unid": "DZ",
+      "tipoOperation": "1"
     }
   ],
   "markUpsList": []

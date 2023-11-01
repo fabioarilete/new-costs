@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import * as S from './Style';
 import Logo from '../../../../assets/img/logosf.png';
-import { CostTypes } from '../../types/CostTypes';
+import { CostMaterial, CostTypes } from '../../types/CostTypes';
 import { CostProvider } from '../../context/CostContext';
 import HeaderForm from '../../CostForms/HeaderForm/HeaderForm';
 import SourceMaterialsForm from '../../CostForms/SourceMaterialsForm/SourceMaterialsForm';
 import ItemMaterial from './Item/ItemMaterial';
+import SourceOperationsForm from '../../CostForms/SourceOperationsForm/SourceOperationsForm';
 
 const inicialCostState: CostTypes = {
   cod: '',
@@ -15,7 +16,7 @@ const inicialCostState: CostTypes = {
   st: '',
   tipoProduto: '',
   sf_st: '',
-  id: '',
+  id: '' as any,
   materiaisProduto: [],
   operacoesProduto: [],
 };
@@ -23,29 +24,7 @@ const inicialCostState: CostTypes = {
 const NewCost = () => {
   const [cost, setCost] = useState<CostTypes>(inicialCostState);
   const [step, setStep] = useState(1);
-  const [materiaisProduto, setMateriaisProduto] = useState<CostTypes[]>([]);
-
-  // const totalMaterial = 0;
-
-  // function addCost(cost: CostTypes) {
-  //   const data = { ...cost, total: totalMaterial };
-  //   api
-  //     .post('products', data)
-  //     .then(res => {
-  //       setCost(state => [...state, { ...data, id: res.data.id }]);
-  //     })
-  //     .catch(err => console.log(err));
-  // }
-
-  // function addMaterials(materialProduto: CostTypes) {
-  //   const data = { ...materialProduto, totalMaterial };
-  //   api
-  //     .post('products/materiaisProduto', data)
-  //     .then(res => {
-  //       setCost(state => [...state, { ...data, id: res.data.id }]);
-  //     })
-  //     .catch(err => console.log(err));
-  // }
+  const [materiaisProduto, setMateriaisProduto] = useState<CostMaterial[]>([]);
 
   function handleValidation() {}
 
@@ -57,7 +36,42 @@ const NewCost = () => {
     setStep(state => state + 1);
   }
 
+  function handleLastStep(step?: number) {
+    if (step) {
+      setStep(step);
+      return;
+    }
+    setStep(state => state - 1);
+  }
+
   function handleRemove() {}
+
+  function handleRendering() {
+    const options: Record<typeof step, ReactNode> = {
+      1: (
+        <HeaderForm handleNextStep={handleNextStep} cost={cost} setCost={setCost} handleValidation={handleValidation} />
+      ),
+      2: (
+        <SourceMaterialsForm
+          handleLastStep={handleLastStep}
+          handleNextStep={handleNextStep}
+          cost={cost}
+          setCost={setCost}
+          handleValidation={handleValidation}
+        />
+      ),
+      3: (
+        <SourceOperationsForm
+          handleLastStep={handleLastStep}
+          cost={cost}
+          setCost={setCost}
+          handleValidation={handleValidation}
+        />
+      ),
+    };
+
+    return options[step];
+  }
 
   return (
     <CostProvider
@@ -65,6 +79,7 @@ const NewCost = () => {
         step,
         setStep,
         handleNextStep,
+        handleLastStep,
         cost,
         setCost,
       }}
@@ -82,17 +97,24 @@ const NewCost = () => {
                 setCost={setCost}
                 handleValidation={handleValidation}
               />
+            ) : step === 2 ? (
+              <SourceMaterialsForm
+                handleLastStep={handleLastStep}
+                handleNextStep={handleNextStep}
+                cost={cost}
+                setCost={setCost}
+                handleValidation={handleValidation}
+              />
             ) : (
-              step === 2 && (
-                <SourceMaterialsForm
-                  handleNextStep={handleNextStep}
+              step === 3 && (
+                <SourceOperationsForm
+                  handleLastStep={handleLastStep}
                   cost={cost}
                   setCost={setCost}
                   handleValidation={handleValidation}
                 />
               )
             )}
-            {/* {step === 3 && <SourceOperationsForm />} */}
           </div>
           <div className="containerCost">
             <div className="costSheet">
@@ -173,9 +195,43 @@ const NewCost = () => {
                     <h4>Valor Total</h4>
                   </div>
                 </div>
-                {materiaisProduto.map(material => (
+                {cost.materiaisProduto.map(material => (
                   <ItemMaterial material={material} handleRemove={handleRemove} key={material.id} />
                 ))}
+
+                <div className="subtotals">
+                  <div className="totalTitle">Total - Materiais</div>
+                  <div className="total">total materiais</div>
+                </div>
+              </div>
+
+              <div className="productMaterialsContainer">
+                <div className="productMaterials">
+                  <div className="material headerT">
+                    <h4>Operação Comum</h4>
+                  </div>
+                  <div className="obsMaterial headerT">
+                    <h4>Observação</h4>
+                  </div>
+                  <div className="qtMaterial headerT">
+                    <h4>Quant</h4>
+                  </div>
+
+                  <div className="valueMaterial headerT">
+                    <h4>Valor Hora</h4>
+                  </div>
+                  <div className="totalMaterial headerT">
+                    <h4>Valor Total</h4>
+                  </div>
+                </div>
+                {cost.materiaisProduto.map(material => (
+                  <ItemMaterial material={material} handleRemove={handleRemove} key={material.id} />
+                ))}
+
+                <div className="subtotals">
+                  <div className="totalTitle">Total - Operações</div>
+                  <div className="total">total Operations</div>
+                </div>
               </div>
             </div>
           </div>

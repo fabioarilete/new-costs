@@ -5,7 +5,7 @@ import { useMaterials } from '../context/MaterialContext';
 import formatCurrency from '../../../utils/formatCurrency';
 
 type Props = {
-  handleRemove(id: string): void;
+  handleRemove(id: number): void;
   material: MaterialTypes;
 };
 

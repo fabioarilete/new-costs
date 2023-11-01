@@ -7,10 +7,11 @@ import { OperationTypes } from '../../types/OperationTypes';
 import { OperationForm } from '../../OperationForm/OperationForm';
 
 const inicialState: OperationTypes = {
-  id: '',
+  id: '' as any,
   name: '',
   valor: '' as any,
   unid: '',
+  tipoOperation: '',
 };
 
 const UpdateOperation = () => {
