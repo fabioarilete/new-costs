@@ -28,4 +28,6 @@ export interface CostTypes {
   id: number;
   materiaisProduto: CostMaterial[];
   operacoesProduto: CostOperation[];
+  totalOperations: number;
+  totalMaterials: number;
 }

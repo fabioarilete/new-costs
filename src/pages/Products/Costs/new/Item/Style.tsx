@@ -20,6 +20,14 @@ export const Container = styled.div`
     text-align: center;
   }
 
+  .obsOperation {
+    width: 27%;
+    font-size: 12px;
+    border-bottom: 0.5px solid grey;
+    border-right: 0.5px solid #c0b7b7;
+    text-align: center;
+  }
+
   .qtMaterial {
     width: 10%;
     border-bottom: 0.5px solid grey;

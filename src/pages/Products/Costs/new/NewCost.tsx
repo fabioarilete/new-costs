@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useMemo, useState } from 'react';
 import * as S from './Style';
 import Logo from '../../../../assets/img/logosf.png';
 import { CostMaterial, CostTypes } from '../../types/CostTypes';
@@ -7,6 +7,8 @@ import HeaderForm from '../../CostForms/HeaderForm/HeaderForm';
 import SourceMaterialsForm from '../../CostForms/SourceMaterialsForm/SourceMaterialsForm';
 import ItemMaterial from './Item/ItemMaterial';
 import SourceOperationsForm from '../../CostForms/SourceOperationsForm/SourceOperationsForm';
+import ItemOperation from './Item/ItemOperation';
+import formatCurrency from '../../../../utils/formatCurrency';
 
 const inicialCostState: CostTypes = {
   cod: '',
@@ -19,12 +21,15 @@ const inicialCostState: CostTypes = {
   id: '' as any,
   materiaisProduto: [],
   operacoesProduto: [],
+  totalOperations: '' as any,
+  totalMaterials: '' as any,
 };
 
 const NewCost = () => {
   const [cost, setCost] = useState<CostTypes>(inicialCostState);
   const [step, setStep] = useState(1);
   const [materiaisProduto, setMateriaisProduto] = useState<CostMaterial[]>([]);
+  const [totalOperations, setTotalOperations] = useState<number>(0);
 
   function handleValidation() {}
 
@@ -46,32 +51,34 @@ const NewCost = () => {
 
   function handleRemove() {}
 
-  function handleRendering() {
-    const options: Record<typeof step, ReactNode> = {
-      1: (
-        <HeaderForm handleNextStep={handleNextStep} cost={cost} setCost={setCost} handleValidation={handleValidation} />
-      ),
-      2: (
-        <SourceMaterialsForm
-          handleLastStep={handleLastStep}
-          handleNextStep={handleNextStep}
-          cost={cost}
-          setCost={setCost}
-          handleValidation={handleValidation}
-        />
-      ),
-      3: (
-        <SourceOperationsForm
-          handleLastStep={handleLastStep}
-          cost={cost}
-          setCost={setCost}
-          handleValidation={handleValidation}
-        />
-      ),
-    };
+  // function handleRendering() {
+  //   const options: Record<typeof step, ReactNode> = {
+  //     1: (
+  //       <HeaderForm handleNextStep={handleNextStep} cost={cost} setCost={setCost} handleValidation={handleValidation} />
+  //     ),
+  //     2: (
+  //       <SourceMaterialsForm
+  //         handleLastStep={handleLastStep}
+  //         handleNextStep={handleNextStep}
+  //         cost={cost}
+  //         setCost={setCost}
+  //         handleValidation={handleValidation}
+  //       />
+  //     ),
+  //     3: (
+  //       <SourceOperationsForm
+  //         handleLastStep={handleLastStep}
+  //         cost={cost}
+  //         setCost={setCost}
+  //         handleValidation={handleValidation}
+  //       />
+  //     ),
+  //   };
 
-    return options[step];
-  }
+  //   return options[step];
+  // }
+
+  console.log(cost);
 
   return (
     <CostProvider
@@ -208,9 +215,9 @@ const NewCost = () => {
               <div className="productMaterialsContainer">
                 <div className="productMaterials">
                   <div className="material headerT">
-                    <h4>Operação Comum</h4>
+                    <h4>Operação</h4>
                   </div>
-                  <div className="obsMaterial headerT">
+                  <div className="obsOperation headerT">
                     <h4>Observação</h4>
                   </div>
                   <div className="qtMaterial headerT">
@@ -224,13 +231,13 @@ const NewCost = () => {
                     <h4>Valor Total</h4>
                   </div>
                 </div>
-                {cost.materiaisProduto.map(material => (
-                  <ItemMaterial material={material} handleRemove={handleRemove} key={material.id} />
+                {cost.operacoesProduto.map(operation => (
+                  <ItemOperation operation={operation} handleRemove={handleRemove} key={operation.id} />
                 ))}
 
                 <div className="subtotals">
                   <div className="totalTitle">Total - Operações</div>
-                  <div className="total">total Operations</div>
+                  <div className="total">{formatCurrency(cost.totalOperations, 'BRL')}</div>
                 </div>
               </div>
             </div>

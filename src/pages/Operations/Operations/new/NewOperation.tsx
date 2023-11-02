@@ -37,7 +37,6 @@ const NewOperation = () => {
     }
     addOperation(operation);
   }
-  console.log(operation);
 
   return (
     <Modal target={ModalTarget.MODAL}>

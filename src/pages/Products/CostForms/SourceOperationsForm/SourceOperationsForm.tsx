@@ -3,7 +3,6 @@ import * as S from './Style';
 import { Input } from '../../../../components/form/Input';
 import SelectOptions from '../../../../components/form/SelectOptions/SelectOptions';
 import api from '../../../../api/api';
-import { MaterialTypes } from '../../../rawMaterials/types/MaterialTypes';
 import { CostOperation, CostTypes } from '../../types/CostTypes';
 import formatCurrency from '../../../../utils/formatCurrency';
 import { OperationTypes } from '../../../Operations/types/OperationTypes';
@@ -32,7 +31,19 @@ const SourceOperationsForm = ({ cost, setCost, handleLastStep, handleValidation 
       .catch(err => console.log(err));
   }, []);
 
-  const selectedOperation = useMemo((): OperationTypes | null => {
+  const totalOperation = useMemo((): CostTypes | any => {
+    if (!cost.operacoesProduto.length) {
+      return 0;
+    }
+    const total = cost.operacoesProduto.reduce((next, item) => {
+      const subTotal = item.totalItemOperation;
+      return next + subTotal;
+    }, 0);
+    return total;
+  }, [cost.operacoesProduto]);
+  console.log(totalOperation);
+
+  const selectedOperation = useMemo((): OperationTypes | CostOperation | null => {
     if (!selectedOperationId) {
       return null;
     }
@@ -51,8 +62,11 @@ const SourceOperationsForm = ({ cost, setCost, handleLastStep, handleValidation 
     if (!selectedOperation) {
       return;
     }
-
-    const totalItemOperation = parseInt(qt);
+    let totalItemOperation = 0;
+    selectedOperation.tipoOperation === '1'
+      ? (totalItemOperation = selectedOperation.valor / parseInt(qt))
+      : (totalItemOperation =
+          selectedOperation.valor / (((3600 / parseInt(ciclo)) * parseInt(cav)) / parseInt(cost.qt)));
 
     const data: CostOperation = {
       ...selectedOperation,
@@ -65,6 +79,7 @@ const SourceOperationsForm = ({ cost, setCost, handleLastStep, handleValidation 
 
     setCost(state => ({
       ...state,
+      totalOperations: totalOperation + totalItemOperation,
       operacoesProduto: [...state.operacoesProduto, data],
     }));
     setObs('');
@@ -133,7 +148,7 @@ const SourceOperationsForm = ({ cost, setCost, handleLastStep, handleValidation 
                 name="cav"
                 placeholder="Informe a quantidade"
                 value={cav}
-                onChange={event => setQt(event.target.value)}
+                onChange={event => setCav(event.target.value)}
               />
 
               <Input
@@ -142,7 +157,7 @@ const SourceOperationsForm = ({ cost, setCost, handleLastStep, handleValidation 
                 name="ciclo"
                 placeholder="Informe a quantidade"
                 value={ciclo}
-                onChange={event => setQt(event.target.value)}
+                onChange={event => setCiclo(event.target.value)}
               />
             </>
           )

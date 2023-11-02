@@ -16,6 +16,8 @@ const inicialCostState: CostTypes = {
   id: '' as any,
   materiaisProduto: [],
   operacoesProduto: [],
+  totalOperations: '' as any,
+  totalMaterials: '' as any,
 };
 
 const Costs = () => {
