@@ -1,5 +1,5 @@
 import formatCurrency from '../../../../../utils/formatCurrency';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { CostOperation } from '../../../types/CostTypes';
 import * as S from './Style';
 type Props = {
@@ -35,7 +35,7 @@ const ItemOperation = ({ operation, removeOperation }: Props) => {
         <p>{formatCurrency(operation.totalItemOperation, 'BRL')}</p>
       </div>
       <button type="button" className="icon" onClick={() => removeOperation(operation.uuid)}>
-        <DeleteForeverIcon />
+        <RemoveCircleIcon />
       </button>
     </S.Container>
   );
