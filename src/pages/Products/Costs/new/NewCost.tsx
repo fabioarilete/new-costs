@@ -1,7 +1,7 @@
-import { ReactNode, useMemo, useState } from 'react';
+import { useState, useId, useMemo, useEffect } from 'react';
 import * as S from './Style';
 import Logo from '../../../../assets/img/logosf.png';
-import { CostMaterial, CostTypes } from '../../types/CostTypes';
+import { CostMaterial, CostOperation, CostTypes } from '../../types/CostTypes';
 import { CostProvider } from '../../context/CostContext';
 import HeaderForm from '../../CostForms/HeaderForm/HeaderForm';
 import SourceMaterialsForm from '../../CostForms/SourceMaterialsForm/SourceMaterialsForm';
@@ -28,8 +28,40 @@ const inicialCostState: CostTypes = {
 const NewCost = () => {
   const [cost, setCost] = useState<CostTypes>(inicialCostState);
   const [step, setStep] = useState(1);
-  const [materiaisProduto, setMateriaisProduto] = useState<CostMaterial[]>([]);
-  const [totalOperations, setTotalOperations] = useState<number>(0);
+
+  useEffect(() => {
+    let total = 0;
+
+    if (!cost.operacoesProduto.length) {
+      total = 0;
+    }
+    total = cost.operacoesProduto.reduce((next, item) => {
+      const subTotal = item.totalItemOperation;
+      return next + subTotal;
+    }, 0);
+
+    setCost(state => ({
+      ...state,
+      totalOperations: total,
+    }));
+  }, [cost.operacoesProduto]);
+
+  useEffect(() => {
+    let total = 0;
+
+    if (!cost.materiaisProduto.length) {
+      total = 0;
+    }
+    total = cost.materiaisProduto.reduce((next, item) => {
+      const subTotal = item.totalItemMaterial;
+      return next + subTotal;
+    }, 0);
+
+    setCost(state => ({
+      ...state,
+      totalMaterials: total,
+    }));
+  }, [cost.materiaisProduto]);
 
   function handleValidation() {}
 
@@ -49,7 +81,29 @@ const NewCost = () => {
     setStep(state => state - 1);
   }
 
-  function handleRemove() {}
+  function removeOperation(operationUuid: string) {
+    const operacoesProduto = cost.operacoesProduto.filter(item => item.uuid !== operationUuid);
+    setCost(state => ({
+      ...state,
+      operacoesProduto,
+    }));
+  }
+
+  function removeMaterial(materialUuid: string) {
+    const materiaisProduto = cost.materiaisProduto.filter(item => item.uuid !== materialUuid);
+    setCost(state => ({
+      ...state,
+      materiaisProduto,
+    }));
+  }
+
+  const totalCost = useMemo((): CostTypes | any => {
+    const total = cost.totalMaterials + cost.totalOperations;
+
+    return total;
+  }, [cost]);
+
+  const totalCostUnit = totalCost / Number(cost.qt);
 
   // function handleRendering() {
   //   const options: Record<typeof step, ReactNode> = {
@@ -77,8 +131,6 @@ const NewCost = () => {
 
   //   return options[step];
   // }
-
-  console.log(cost);
 
   return (
     <CostProvider
@@ -203,12 +255,12 @@ const NewCost = () => {
                   </div>
                 </div>
                 {cost.materiaisProduto.map(material => (
-                  <ItemMaterial material={material} handleRemove={handleRemove} key={material.id} />
+                  <ItemMaterial material={material} removeMaterial={removeMaterial} key={material.id} />
                 ))}
 
                 <div className="subtotals">
                   <div className="totalTitle">Total - Materiais</div>
-                  <div className="total">total materiais</div>
+                  <div className="total">{formatCurrency(cost.totalMaterials, 'BRL')}</div>
                 </div>
               </div>
 
@@ -232,12 +284,28 @@ const NewCost = () => {
                   </div>
                 </div>
                 {cost.operacoesProduto.map(operation => (
-                  <ItemOperation operation={operation} handleRemove={handleRemove} key={operation.id} />
+                  <ItemOperation operation={operation} removeOperation={removeOperation} key={operation.id} />
                 ))}
 
                 <div className="subtotals">
                   <div className="totalTitle">Total - Operações</div>
                   <div className="total">{formatCurrency(cost.totalOperations, 'BRL')}</div>
+                </div>
+              </div>
+
+              <div className="totalsCost">
+                <div className="totalsCostTitle">
+                  <h4>Custo Total</h4>
+                </div>
+                <div className="container">
+                  <div className="containerTotals">
+                    <div className="totalsTitle">Total Unitário</div>
+                    <div className="totals">{totalCost === 0 ? 'R$ 0,00' : formatCurrency(totalCostUnit, 'BRL')}</div>
+                  </div>
+                  <div className="containerTotals">
+                    <div className="totalsTitle">Total {cost.unid}</div>
+                    <div className="totals">{formatCurrency(totalCost, 'BRL')}</div>
+                  </div>
                 </div>
               </div>
             </div>

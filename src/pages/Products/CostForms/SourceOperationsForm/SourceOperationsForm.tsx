@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
 import * as S from './Style';
+import { v4 as uuidv4 } from 'uuid';
 import { Input } from '../../../../components/form/Input';
 import SelectOptions from '../../../../components/form/SelectOptions/SelectOptions';
 import api from '../../../../api/api';
@@ -31,24 +32,12 @@ const SourceOperationsForm = ({ cost, setCost, handleLastStep, handleValidation 
       .catch(err => console.log(err));
   }, []);
 
-  const totalOperation = useMemo((): CostTypes | any => {
-    if (!cost.operacoesProduto.length) {
-      return 0;
-    }
-    const total = cost.operacoesProduto.reduce((next, item) => {
-      const subTotal = item.totalItemOperation;
-      return next + subTotal;
-    }, 0);
-    return total;
-  }, [cost.operacoesProduto]);
-  console.log(totalOperation);
-
   const selectedOperation = useMemo((): OperationTypes | CostOperation | null => {
     if (!selectedOperationId) {
       return null;
     }
 
-    const operation = operations.find(item => item.id === parseInt(selectedOperationId));
+    const operation = operations.find(item => item.id === Number(selectedOperationId));
 
     if (!operation) {
       return null;
@@ -64,9 +53,8 @@ const SourceOperationsForm = ({ cost, setCost, handleLastStep, handleValidation 
     }
     let totalItemOperation = 0;
     selectedOperation.tipoOperation === '1'
-      ? (totalItemOperation = selectedOperation.valor / parseInt(qt))
-      : (totalItemOperation =
-          selectedOperation.valor / (((3600 / parseInt(ciclo)) * parseInt(cav)) / parseInt(cost.qt)));
+      ? (totalItemOperation = selectedOperation.valor / Number(qt))
+      : (totalItemOperation = selectedOperation.valor / (((3600 / Number(ciclo)) * Number(cav)) / Number(cost.qt)));
 
     const data: CostOperation = {
       ...selectedOperation,
@@ -75,11 +63,11 @@ const SourceOperationsForm = ({ cost, setCost, handleLastStep, handleValidation 
       obs,
       cav,
       ciclo,
+      uuid: uuidv4(),
     };
 
     setCost(state => ({
       ...state,
-      totalOperations: totalOperation + totalItemOperation,
       operacoesProduto: [...state.operacoesProduto, data],
     }));
     setObs('');

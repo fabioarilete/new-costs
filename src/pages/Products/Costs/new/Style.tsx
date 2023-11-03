@@ -20,7 +20,7 @@ export const Container = styled.div`
   }
 
   .headers {
-    width: 40%;
+    width: 30%;
     display: flex;
     flex-direction: column;
   }
@@ -33,12 +33,13 @@ export const Container = styled.div`
 
   .containerCost {
     height: 100vh;
-    width: 60%;
+    width: 67%;
   }
 
   .costSheet {
-    width: 97%;
+    width: 100%;
     height: 100vh;
+    margin-left: 15px;
     padding-top: 10px;
     margin-top: 10px;
     border-radius: 10px;
@@ -140,6 +141,7 @@ export const Container = styled.div`
 
   .productMaterialsContainer {
     margin: 10px;
+    margin-left: 25px;
     display: flex;
     flex-direction: column;
     border: 0.5px solid #c0b7b7;
@@ -224,5 +226,56 @@ export const Container = styled.div`
     font-weight: bold;
     text-align: end;
     padding-right: 5px;
+    background-color: #d0e857;
+  }
+
+  .totalsCost {
+    margin: 10px;
+    margin-left: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+  }
+
+  .totalsCostTitle {
+    width: 40%;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding-right: 5px;
+    background-color: #262323;
+    color: #ffbb33;
+    border: 0.5px solid #c0b7b7;
+  }
+
+  .container {
+    display: flex;
+    width: 40%;
+    border: 0.5px solid #c0b7b7;
+  }
+
+  .containerTotals {
+    width: 50%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .totalsTitle {
+    width: 100%;
+    text-align: center;
+    background-color: #4f4a4a;
+    border-right: 0.5px solid #c0b7b7;
+    color: #ffbb33;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .totals {
+    width: 100%;
+    text-align: center;
+    border-right: 0.5px solid #c0b7b7;
+    font-size: 20px;
+    font-weight: bold;
   }
 `;

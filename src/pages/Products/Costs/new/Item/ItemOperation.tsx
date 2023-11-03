@@ -1,12 +1,13 @@
 import formatCurrency from '../../../../../utils/formatCurrency';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { CostOperation } from '../../../types/CostTypes';
 import * as S from './Style';
 type Props = {
-  handleRemove(id: string): void;
+  removeOperation(id: string): void;
   operation: CostOperation;
 };
 
-const ItemOperation = ({ operation, handleRemove }: Props) => {
+const ItemOperation = ({ operation, removeOperation }: Props) => {
   return (
     <S.Container>
       <div className="material">
@@ -22,7 +23,9 @@ const ItemOperation = ({ operation, handleRemove }: Props) => {
         )}
       </div>
       <div className="qtMaterial">
-        <p>{operation.qt}</p>
+        <p>
+          {operation.tipoOperation === '0' ? (operation.valor / operation.totalItemOperation).toFixed(1) : operation.qt}
+        </p>
       </div>
 
       <div className="valueMaterial">
@@ -31,6 +34,9 @@ const ItemOperation = ({ operation, handleRemove }: Props) => {
       <div className="totalMaterial">
         <p>{formatCurrency(operation.totalItemOperation, 'BRL')}</p>
       </div>
+      <button type="button" className="icon" onClick={() => removeOperation(operation.uuid)}>
+        <DeleteForeverIcon />
+      </button>
     </S.Container>
   );
 };

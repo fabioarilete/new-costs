@@ -5,7 +5,7 @@ export interface CostMaterial extends MaterialTypes {
   totalItemMaterial: number;
   obs: string;
   qt: string;
-  id: number;
+  uuid: string;
 }
 
 export interface CostOperation extends OperationTypes {
@@ -14,7 +14,7 @@ export interface CostOperation extends OperationTypes {
   qt: string;
   cav: string;
   ciclo: string;
-  id: number;
+  uuid: string;
 }
 
 export interface CostTypes {

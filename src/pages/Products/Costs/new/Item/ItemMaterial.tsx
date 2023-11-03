@@ -1,12 +1,14 @@
 import formatCurrency from '../../../../../utils/formatCurrency';
 import { CostMaterial } from '../../../types/CostTypes';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+
 import * as S from './Style';
 type Props = {
-  handleRemove(id: string): void;
+  removeMaterial(id: string): void;
   material: CostMaterial;
 };
 
-const ItemMaterial = ({ material, handleRemove }: Props) => {
+const ItemMaterial = ({ material, removeMaterial }: Props) => {
   return (
     <S.Container>
       <div className="material">
@@ -27,6 +29,9 @@ const ItemMaterial = ({ material, handleRemove }: Props) => {
       <div className="totalMaterial">
         <p>{formatCurrency(material.totalItemMaterial, 'BRL')}</p>
       </div>
+      <button type="button" className="icon" onClick={() => removeMaterial(material.uuid)}>
+        <DeleteForeverIcon />
+      </button>
     </S.Container>
   );
 };

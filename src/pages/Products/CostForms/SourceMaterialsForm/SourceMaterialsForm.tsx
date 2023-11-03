@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
 import * as S from './Style';
+import { v4 as uuidv4 } from 'uuid';
 import { Input } from '../../../../components/form/Input';
 import SelectOptions from '../../../../components/form/SelectOptions/SelectOptions';
 import api from '../../../../api/api';
@@ -59,6 +60,7 @@ const SourceMaterialsForm = ({ cost, setCost, handleNextStep, handleLastStep, ha
       totalItemMaterial,
       qt,
       obs,
+      uuid: uuidv4(),
     };
 
     setCost(state => ({

@@ -57,4 +57,13 @@ export const Container = styled.div`
     text-align: end;
     padding-right: 5px;
   }
+
+  .icon {
+    position: absolute;
+    background: #fff;
+    margin-left: -25px;
+    color: red;
+    border: none;
+    cursor: pointer;
+  }
 `;
