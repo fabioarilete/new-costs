@@ -293,6 +293,35 @@ const NewCost = () => {
                 </div>
               </div>
 
+              <div className="geral">
+                <div className="coeficiente"></div>
+                <div className="finalInfo">
+                  <div className="values">
+                    <div className="valorTabela">
+                      <div className="precoSugerido"></div>
+                      <div className="precoTabela"></div>
+                    </div>
+                    <div className="custoTotal">
+                      <div className="custo"></div>
+                      <div className="precoMedio"></div>
+                    </div>
+                  </div>
+                  <div className="margens">
+                    <div className="margemTabela">
+                      <div className="mgTabTitle"></div>
+                      <div className="mgTab"></div>
+                    </div>
+                    <div className="obs"></div>
+                    <div className="margemReal">
+                      <div className="mgRealTitle"></div>
+                      <div className="mgReal"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* //separação do final */}
+
               <div className="totalsCost">
                 <div className="totalsCostTitle">
                   <h4>Custo Total</h4>

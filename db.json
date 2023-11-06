@@ -223,5 +223,48 @@
       "tipoOperation": "1"
     }
   ],
-  "markUpsList": []
+  "markUpsList": [
+    {
+      "id": 1,
+      "name": "SEM SUBSTITUIÇÃO TRIBUTÁRIA",
+      "impostos": "13",
+      "comissao": "8.7",
+      "adm": "6",
+      "frete": "8",
+      "financeiro": "4",
+      "promotores": "2",
+      "marketing": "2",
+      "bonificacoes": "2",
+      "lucro": "15",
+      "coeficiente": 2.544529262086514
+    },
+    {
+      "id": 2,
+      "name": "COM SUBSTITUIÇÃO TRIBUTÁRIA",
+      "impostos": "6",
+      "comissao": "8.7",
+      "adm": "6",
+      "frete": "8",
+      "financeiro": "4",
+      "promotores": "2",
+      "marketing": "2",
+      "bonificacoes": "2",
+      "lucro": "15",
+      "coeficiente": 2.1598272138228944
+    },
+    {
+      "id": 3,
+      "name": "TAUSTE",
+      "impostos": "12",
+      "comissao": "2",
+      "adm": "5",
+      "frete": "7",
+      "financeiro": "4",
+      "promotores": "2",
+      "marketing": "2",
+      "bonificacoes": "2",
+      "lucro": "15",
+      "coeficiente": 2.0408163265306123
+    }
+  ]
 }
