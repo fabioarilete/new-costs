@@ -13,10 +13,9 @@ interface CostTypesForm {
   setCost: Dispatch<SetStateAction<CostTypes>>;
   handleValidation(cost: CostTypes): void;
   handleLastStep(step?: number): void;
-  handleNextStep(step?: number): void;
 }
 
-const SourceOperationsForm = ({ cost, setCost, handleNextStep, handleLastStep, handleValidation }: CostTypesForm) => {
+const SourceOperationsForm = ({ cost, setCost, handleLastStep, handleValidation }: CostTypesForm) => {
   const [operations, setOperations] = useState<OperationTypes[]>([]);
   const [selectedOperationId, setSelectedOperationId] = useState<string>();
   const [qt, setQt] = useState('');
@@ -159,8 +158,8 @@ const SourceOperationsForm = ({ cost, setCost, handleNextStep, handleLastStep, h
           <button className="btn" type="submit" onClick={handleSubmit}>
             Adiconar mais Operação
           </button>
-          <button className="btn" type="submit" onClick={() => handleNextStep()}>
-            Config Final
+          <button className="btn" type="submit">
+            Concluir
           </button>
         </div>
       </form>

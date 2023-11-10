@@ -6,6 +6,16 @@ type Props = {
 };
 
 const ResultsCost = ({ cost }: Props) => {
+  const encargos =
+    Number(cost.markUpProduct?.impostos) +
+    Number(cost.markUpProduct?.comissao) +
+    Number(cost.markUpProduct?.adm) +
+    Number(cost.markUpProduct?.frete) +
+    Number(cost.markUpProduct?.financeiro) +
+    Number(cost.markUpProduct?.marketing) +
+    Number(cost.markUpProduct?.promotores) +
+    Number(cost.markUpProduct?.bonificacoes);
+
   const totalCost = Number(cost.totalCost);
   const unitCost = Number(cost.unitCost);
   const coef = Number(cost.markUpProduct?.coeficiente);
@@ -13,6 +23,8 @@ const ResultsCost = ({ cost }: Props) => {
   const priceList = Number(cost.infoProduct?.tabela);
   const mediumPrice = Number(cost.infoProduct?.precoMedio);
   const descount = ((priceList - mediumPrice) / priceList) * 100;
+  const priceListProfit = ((priceList - (unitCost + priceList * (encargos / 100))) / priceList) * 100;
+  const realPriceProfit = ((mediumPrice - (unitCost + mediumPrice * (encargos / 100))) / mediumPrice) * 100;
 
   return (
     <S.Container>
@@ -36,7 +48,7 @@ const ResultsCost = ({ cost }: Props) => {
       </S.Line>
       <S.Line>
         <S.Description color="var(--color3)">Margem de Lucro - Tabela</S.Description>
-        <S.Value color="var(--color3)">%</S.Value>
+        <S.Value color="var(--color3)">{priceListProfit.toFixed(2)}%</S.Value>
       </S.Line>
       <br />
       <S.Line>
@@ -50,7 +62,7 @@ const ResultsCost = ({ cost }: Props) => {
       </S.Line>
       <S.Line>
         <S.Description color="var(--color9)">Margem de Lucro - Real</S.Description>
-        <S.Value color="var(--color9)">%</S.Value>
+        <S.Value color="var(--color9)">{realPriceProfit.toFixed(2)}%</S.Value>
       </S.Line>
     </S.Container>
   );

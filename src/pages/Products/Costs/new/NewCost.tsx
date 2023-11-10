@@ -5,7 +5,6 @@ import { CostProvider } from '../../context/CostContext';
 import HeaderForm from '../../CostForms/HeaderForm/HeaderForm';
 import SourceMaterialsForm from '../../CostForms/SourceMaterialsForm/SourceMaterialsForm';
 import SourceOperationsForm from '../../CostForms/SourceOperationsForm/SourceOperationsForm';
-import SourceMarkUpForm from '../../CostForms/SourceMarkUpForm/SourceMarkUpForm';
 import HeaderCost from '../../CostComponents/HeaderCost/HeaderCost';
 import MaterialCost from '../../CostComponents/MaterialCost/MaterialCost';
 import OperationCost from '../../CostComponents/OperationCost/OperationCost';
@@ -91,7 +90,7 @@ const NewCost = () => {
       totalCost: total,
       unitCost,
     }));
-  }, [cost.totalMaterials, cost.totalOperations]);
+  }, [cost.totalMaterials, cost.totalOperations, cost.qt]);
 
   function handleValidation() {}
 
@@ -158,17 +157,9 @@ const NewCost = () => {
                 setCost={setCost}
                 handleValidation={handleValidation}
               />
-            ) : step === 3 ? (
-              <SourceOperationsForm
-                handleLastStep={handleLastStep}
-                handleNextStep={handleNextStep}
-                cost={cost}
-                setCost={setCost}
-                handleValidation={handleValidation}
-              />
             ) : (
-              step === 4 && (
-                <SourceMarkUpForm
+              step === 3 && (
+                <SourceOperationsForm
                   handleLastStep={handleLastStep}
                   cost={cost}
                   setCost={setCost}

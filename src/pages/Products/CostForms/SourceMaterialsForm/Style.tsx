@@ -29,12 +29,12 @@ export const Container = styled.div`
     margin-top: 20px;
     background-color: var(--color9);
     color: #fff;
-    padding: auto;
+    padding: 5px;
     text-decoration: none;
     transition: 0.5s;
     cursor: pointer;
     border: none;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
   }
 

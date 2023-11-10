@@ -18,27 +18,31 @@ export const Container = styled.div`
     box-shadow: 2px 2px 5px #000;
   }
 
+  .form h1 {
+    color: var(--color3);
+  }
+
   .btn {
     width: 30%;
     height: 35px;
     border-radius: 5px;
     margin-top: 20px;
-    background-color: rgb(64, 62, 62);
+    background-color: var(--color3);
     color: #fff;
-    padding: auto;
+    padding: 5px;
     text-decoration: none;
     transition: 0.5s;
     cursor: pointer;
     border: none;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
   }
 
   .btn:hover {
     font-weight: bold;
-    color: rgb(64, 62, 62);
+    color: var(--color3);
     background-color: #fff;
-    border: 2px solid rgb(64, 62, 62);
+    border: 2px solid var(--color3);
   }
 
   .containerOptions {
@@ -48,22 +52,6 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
     margin-top: 5px;
-  }
-
-  .containerRadioButton {
-    border-radius: 5px;
-    background-color: #fff;
-    width: 70%;
-    height: 35px;
-    display: flex;
-    justify-content: space-around;
-    border: 1px solid rgb(64, 62, 62);
-  }
-
-  .radioButtonTitle {
-    font-weight: bold;
-    font-size: 16px;
-    color: #7b7b7b;
   }
 
   .containerButtons {
