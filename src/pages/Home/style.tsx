@@ -2,17 +2,16 @@ import styled from 'styled-components';
 
 export const ContainerHome = styled.div`
   width: 100%;
+  margin-top: -250px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: auto;
-  padding-bottom: 120;
 
   .title {
     font-size: 2.5em;
     margin-bottom: 0.5em;
-    color: #000;
+    color: #fff;
   }
 
   .span {
@@ -23,7 +22,7 @@ export const ContainerHome = styled.div`
 
   .slogan {
     font-size: 1.3em;
-    color: #000;
+    color: #fff;
     font-weight: bold;
   }
 
