@@ -1,6 +1,6 @@
-import formatCurrency from '../../../../../utils/formatCurrency';
+import formatCurrency from '../../../../../../utils/formatCurrency';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import { CostOperation } from '../../../types/CostTypes';
+import { CostOperation } from '../../../../types/CostTypes';
 import * as S from './Style';
 type Props = {
   removeOperation(id: string): void;
@@ -10,7 +10,7 @@ type Props = {
 const ItemOperation = ({ operation, removeOperation }: Props) => {
   return (
     <S.Container>
-      <div className="material">
+      <div className="operation">
         <p>{operation.name}</p>
       </div>
       <div className="obsOperation">
@@ -22,16 +22,16 @@ const ItemOperation = ({ operation, removeOperation }: Props) => {
           <p>{operation.obs}</p>
         )}
       </div>
-      <div className="qtMaterial">
+      <div className="qtOperation">
         <p>
           {operation.tipoOperation === '0' ? (operation.valor / operation.totalItemOperation).toFixed(1) : operation.qt}
         </p>
       </div>
 
-      <div className="valueMaterial">
+      <div className="valueOperation">
         <p>{formatCurrency(operation.valor, 'BRL')}</p>
       </div>
-      <div className="totalMaterial">
+      <div className="totalOperation">
         <p>{formatCurrency(operation.totalItemOperation, 'BRL')}</p>
       </div>
       <button type="button" className="icon" onClick={() => removeOperation(operation.uuid)}>

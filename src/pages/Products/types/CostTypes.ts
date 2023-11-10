@@ -1,5 +1,7 @@
+import { MarkUpTypes } from '../../MarkUps/types/MarkUpTypes';
 import { OperationTypes } from '../../Operations/types/OperationTypes';
 import { MaterialTypes } from '../../rawMaterials/types/MaterialTypes';
+import { InfoTypes } from './InfoTypes';
 
 export interface CostMaterial extends MaterialTypes {
   totalItemMaterial: number;
@@ -30,4 +32,10 @@ export interface CostTypes {
   operacoesProduto: CostOperation[];
   totalOperations: number;
   totalMaterials: number;
+  markUpProduct: MarkUpTypes | null;
+  infoProduct: InfoTypes | null;
+  totalCost: number;
+  unitCost: number;
+  priceList: number;
+  mediumPrice: number;
 }

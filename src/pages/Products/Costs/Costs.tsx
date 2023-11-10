@@ -18,6 +18,12 @@ const inicialCostState: CostTypes = {
   operacoesProduto: [],
   totalOperations: '' as any,
   totalMaterials: '' as any,
+  markUpProduct: '' as any,
+  infoProduct: null,
+  totalCost: '' as any,
+  unitCost: '' as any,
+  priceList: '' as any,
+  mediumPrice: '' as any,
 };
 
 const Costs = () => {

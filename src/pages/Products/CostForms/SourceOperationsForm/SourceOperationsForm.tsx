@@ -13,11 +13,12 @@ interface CostTypesForm {
   setCost: Dispatch<SetStateAction<CostTypes>>;
   handleValidation(cost: CostTypes): void;
   handleLastStep(step?: number): void;
+  handleNextStep(step?: number): void;
 }
 
-const SourceOperationsForm = ({ cost, setCost, handleLastStep, handleValidation }: CostTypesForm) => {
+const SourceOperationsForm = ({ cost, setCost, handleNextStep, handleLastStep, handleValidation }: CostTypesForm) => {
   const [operations, setOperations] = useState<OperationTypes[]>([]);
-  const [selectedOperationId, setSelectOperationId] = useState<string>();
+  const [selectedOperationId, setSelectedOperationId] = useState<string>();
   const [qt, setQt] = useState('');
   const [obs, setObs] = useState('');
   const [cav, setCav] = useState('');
@@ -83,7 +84,7 @@ const SourceOperationsForm = ({ cost, setCost, handleLastStep, handleValidation 
 
         <SelectOptions
           value={selectedOperationId}
-          onChange={event => setSelectOperationId(event.target.value)}
+          onChange={event => setSelectedOperationId(event.target.value)}
           label="Operação"
         >
           {operations.map(item => (
@@ -157,6 +158,9 @@ const SourceOperationsForm = ({ cost, setCost, handleLastStep, handleValidation 
           </button>
           <button className="btn" type="submit" onClick={handleSubmit}>
             Adiconar mais Operação
+          </button>
+          <button className="btn" type="submit" onClick={() => handleNextStep()}>
+            Config Final
           </button>
         </div>
       </form>

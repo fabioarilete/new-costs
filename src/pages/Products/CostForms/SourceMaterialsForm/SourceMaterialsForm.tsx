@@ -36,7 +36,7 @@ const SourceMaterialsForm = ({ cost, setCost, handleNextStep, handleLastStep, ha
       return null;
     }
 
-    const material = materials.find(item => item.id === parseInt(selectedMaterialId));
+    const material = materials.find(item => item.id === Number(selectedMaterialId));
 
     if (!material) {
       return null;
@@ -53,7 +53,7 @@ const SourceMaterialsForm = ({ cost, setCost, handleNextStep, handleLastStep, ha
       return;
     }
 
-    const totalItemMaterial = parseInt(qt) * selectedMaterial.total;
+    const totalItemMaterial = Number(qt) * selectedMaterial.total;
 
     const data: CostMaterial = {
       ...selectedMaterial,

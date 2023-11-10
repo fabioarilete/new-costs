@@ -1,5 +1,5 @@
-import formatCurrency from '../../../../../utils/formatCurrency';
-import { CostMaterial } from '../../../types/CostTypes';
+import formatCurrency from '../../../../../../utils/formatCurrency';
+import { CostMaterial } from '../../../../types/CostTypes';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
 import * as S from './Style';

@@ -11,6 +11,7 @@ const SelectOptions: React.FC<SelectoptionsProps> = ({ value, name, label, child
     <S.Select2>
       <S.Label htmlFor={name}>{label}</S.Label>
       <S.Select {...rest} id={name} value={value || ''} name={name}>
+        <option>Escolha uma opção</option>
         {children}
       </S.Select>
     </S.Select2>

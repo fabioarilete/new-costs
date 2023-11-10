@@ -1,14 +1,16 @@
-import { useState, useId, useMemo, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import * as S from './Style';
-import Logo from '../../../../assets/img/logosf.png';
-import { CostMaterial, CostOperation, CostTypes } from '../../types/CostTypes';
+import { CostTypes } from '../../types/CostTypes';
 import { CostProvider } from '../../context/CostContext';
 import HeaderForm from '../../CostForms/HeaderForm/HeaderForm';
 import SourceMaterialsForm from '../../CostForms/SourceMaterialsForm/SourceMaterialsForm';
-import ItemMaterial from './Item/ItemMaterial';
 import SourceOperationsForm from '../../CostForms/SourceOperationsForm/SourceOperationsForm';
-import ItemOperation from './Item/ItemOperation';
-import formatCurrency from '../../../../utils/formatCurrency';
+import SourceMarkUpForm from '../../CostForms/SourceMarkUpForm/SourceMarkUpForm';
+import HeaderCost from '../../CostComponents/HeaderCost/HeaderCost';
+import MaterialCost from '../../CostComponents/MaterialCost/MaterialCost';
+import OperationCost from '../../CostComponents/OperationCost/OperationCost';
+import MarkUpCost from '../../CostComponents/MarkUpCost/MarkUpCost';
+import ResultsCost from '../../CostComponents/ResultsCost/ResultsCost';
 
 const inicialCostState: CostTypes = {
   cod: '',
@@ -23,6 +25,12 @@ const inicialCostState: CostTypes = {
   operacoesProduto: [],
   totalOperations: '' as any,
   totalMaterials: '' as any,
+  markUpProduct: null,
+  infoProduct: null,
+  totalCost: '' as any,
+  unitCost: '' as any,
+  priceList: '' as any,
+  mediumPrice: '' as any,
 };
 
 const NewCost = () => {
@@ -63,6 +71,28 @@ const NewCost = () => {
     }));
   }, [cost.materiaisProduto]);
 
+  useEffect(() => {
+    let total = 0;
+
+    if (!cost.totalMaterials && !cost.totalOperations) {
+      total = 0;
+    }
+    total = Number(cost.totalMaterials) + Number(cost.totalOperations);
+
+    let unitCost = 0;
+    if (!total) {
+      unitCost = 0;
+    }
+
+    unitCost = total / Number(cost.qt);
+
+    setCost(state => ({
+      ...state,
+      totalCost: total,
+      unitCost,
+    }));
+  }, [cost.totalMaterials, cost.totalOperations]);
+
   function handleValidation() {}
 
   function handleNextStep(step?: number) {
@@ -97,40 +127,7 @@ const NewCost = () => {
     }));
   }
 
-  const totalCost = useMemo((): CostTypes | any => {
-    const total = cost.totalMaterials + cost.totalOperations;
-
-    return total;
-  }, [cost]);
-
-  const totalCostUnit = totalCost / Number(cost.qt);
-
-  // function handleRendering() {
-  //   const options: Record<typeof step, ReactNode> = {
-  //     1: (
-  //       <HeaderForm handleNextStep={handleNextStep} cost={cost} setCost={setCost} handleValidation={handleValidation} />
-  //     ),
-  //     2: (
-  //       <SourceMaterialsForm
-  //         handleLastStep={handleLastStep}
-  //         handleNextStep={handleNextStep}
-  //         cost={cost}
-  //         setCost={setCost}
-  //         handleValidation={handleValidation}
-  //       />
-  //     ),
-  //     3: (
-  //       <SourceOperationsForm
-  //         handleLastStep={handleLastStep}
-  //         cost={cost}
-  //         setCost={setCost}
-  //         handleValidation={handleValidation}
-  //       />
-  //     ),
-  //   };
-
-  //   return options[step];
-  // }
+  function handleRemove() {}
 
   return (
     <CostProvider
@@ -144,9 +141,6 @@ const NewCost = () => {
       }}
     >
       <S.Container>
-        <div className="containerTitle">
-          <h1 className="title">Cadastro de Produto</h1>
-        </div>
         <div className="content">
           <div className="headers">
             {step === 1 ? (
@@ -164,9 +158,17 @@ const NewCost = () => {
                 setCost={setCost}
                 handleValidation={handleValidation}
               />
+            ) : step === 3 ? (
+              <SourceOperationsForm
+                handleLastStep={handleLastStep}
+                handleNextStep={handleNextStep}
+                cost={cost}
+                setCost={setCost}
+                handleValidation={handleValidation}
+              />
             ) : (
-              step === 3 && (
-                <SourceOperationsForm
+              step === 4 && (
+                <SourceMarkUpForm
                   handleLastStep={handleLastStep}
                   cost={cost}
                   setCost={setCost}
@@ -177,165 +179,12 @@ const NewCost = () => {
           </div>
           <div className="containerCost">
             <div className="costSheet">
-              <div className="incialContainer">
-                <div className="logoContainer">
-                  <img src={Logo} alt="" />
-                  <p>Planilha de custos de produto</p>
-                </div>
-                <div className="imageContainer"></div>
-                <div className="infoContainer">
-                  <div className="tipo">
-                    <div className="infoTitle">
-                      <p>Quant. Embalagem: </p>
-                    </div>
-                    <div className="info">{cost.qt}</div>
-                  </div>
-
-                  <div className="tipo">
-                    <div className="infoTitle">
-                      <p>Sub. Tributária: </p>
-                    </div>
-                    <div className="info">{cost.st === '0' ? 'Não' : 'Sim'}</div>
-                  </div>
-
-                  <div className="tipo">
-                    <div className="infoTitle">
-                      <p>SFCO x STTE: </p>
-                    </div>
-                    <div className="info">{cost.sf_st === '0' ? 'Não' : 'Sim'}</div>
-                  </div>
-
-                  <div className="tipo">
-                    <div className="infoTitle">
-                      <p>Tipo Produto: </p>
-                    </div>
-                    <div className="info">{cost.tipoProduto === '0' ? 'Revenda' : 'Produzido'}</div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="descriptionProduct">
-                <div className="headerDescription">
-                  <div className="cod headerT">
-                    <h4>Código</h4>
-                  </div>
-                  <div className="description headerT">
-                    <h4>Descrição do Produto</h4>
-                  </div>
-                </div>
-                <div className="headerDescription">
-                  <div className="cod">
-                    <p>{cost.cod}</p>
-                  </div>
-                  <div className="description">
-                    <p>{cost.name}</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="productMaterialsContainer">
-                <div className="productMaterials">
-                  <div className="material headerT">
-                    <h4>Matéria-Prima</h4>
-                  </div>
-                  <div className="obsMaterial headerT">
-                    <h4>Observação</h4>
-                  </div>
-                  <div className="qtMaterial headerT">
-                    <h4>Quant</h4>
-                  </div>
-                  <div className="unitMaterial headerT">
-                    <h4>Unid</h4>
-                  </div>
-                  <div className="valueMaterial headerT">
-                    <h4>Valor Unitário</h4>
-                  </div>
-                  <div className="totalMaterial headerT">
-                    <h4>Valor Total</h4>
-                  </div>
-                </div>
-                {cost.materiaisProduto.map(material => (
-                  <ItemMaterial material={material} removeMaterial={removeMaterial} key={material.id} />
-                ))}
-
-                <div className="subtotals">
-                  <div className="totalTitle">Total - Materiais</div>
-                  <div className="total">{formatCurrency(cost.totalMaterials, 'BRL')}</div>
-                </div>
-              </div>
-
-              <div className="productMaterialsContainer">
-                <div className="productMaterials">
-                  <div className="material headerT">
-                    <h4>Operação</h4>
-                  </div>
-                  <div className="obsOperation headerT">
-                    <h4>Observação</h4>
-                  </div>
-                  <div className="qtMaterial headerT">
-                    <h4>Quant</h4>
-                  </div>
-
-                  <div className="valueMaterial headerT">
-                    <h4>Valor Hora</h4>
-                  </div>
-                  <div className="totalMaterial headerT">
-                    <h4>Valor Total</h4>
-                  </div>
-                </div>
-                {cost.operacoesProduto.map(operation => (
-                  <ItemOperation operation={operation} removeOperation={removeOperation} key={operation.id} />
-                ))}
-
-                <div className="subtotals">
-                  <div className="totalTitle">Total - Operações</div>
-                  <div className="total">{formatCurrency(cost.totalOperations, 'BRL')}</div>
-                </div>
-              </div>
-
-              <div className="geral">
-                <div className="coeficiente"></div>
-                <div className="finalInfo">
-                  <div className="values">
-                    <div className="valorTabela">
-                      <div className="precoSugerido"></div>
-                      <div className="precoTabela"></div>
-                    </div>
-                    <div className="custoTotal">
-                      <div className="custo"></div>
-                      <div className="precoMedio"></div>
-                    </div>
-                  </div>
-                  <div className="margens">
-                    <div className="margemTabela">
-                      <div className="mgTabTitle"></div>
-                      <div className="mgTab"></div>
-                    </div>
-                    <div className="obs"></div>
-                    <div className="margemReal">
-                      <div className="mgRealTitle"></div>
-                      <div className="mgReal"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* //separação do final */}
-
-              <div className="totalsCost">
-                <div className="totalsCostTitle">
-                  <h4>Custo Total</h4>
-                </div>
-                <div className="container">
-                  <div className="containerTotals">
-                    <div className="totalsTitle">Total Unitário</div>
-                    <div className="totals">{totalCost === 0 ? 'R$ 0,00' : formatCurrency(totalCostUnit, 'BRL')}</div>
-                  </div>
-                  <div className="containerTotals">
-                    <div className="totalsTitle">Total {cost.unid}</div>
-                    <div className="totals">{formatCurrency(totalCost, 'BRL')}</div>
-                  </div>
-                </div>
+              <HeaderCost cost={cost} handleRemove={handleRemove} />
+              <MaterialCost cost={cost} removeMaterial={removeMaterial} />
+              <OperationCost cost={cost} removeOperation={removeOperation} />
+              <div className="containerInformations">
+                <MarkUpCost cost={cost} />
+                <ResultsCost cost={cost} />
               </div>
             </div>
           </div>

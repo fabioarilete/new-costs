@@ -1,9 +1,15 @@
-import React, { Dispatch, SetStateAction, useEffect } from 'react';
+import React, { Dispatch, SetStateAction, useMemo, useState } from 'react';
 import * as S from './Style';
 import { CostTypes } from '../../types/CostTypes';
 import { Input } from '../../../../components/form/Input';
 import { SelectUnits } from '../../../../components/form/SelectUnits';
 import { RadioButton } from '../../../../components/form/RadioButton';
+import { MarkUpTypes } from '../../../MarkUps/types/MarkUpTypes';
+import SelectOptions from '../../../../components/form/SelectOptions/SelectOptions';
+import { useFetchMarkUps } from '../../Hooks/useFetchMarkUps';
+import { InfoTypes } from '../../types/InfoTypes';
+import { Code } from '@mui/icons-material';
+import { useFetchInfo } from '../../CostComponents/Hooks/useFetchInfo';
 
 interface CostFormProps {
   cost: CostTypes;
@@ -13,12 +19,54 @@ interface CostFormProps {
 }
 
 const HeaderForm = ({ cost, setCost, handleValidation, handleNextStep }: CostFormProps) => {
-  function _handleValidation(event: React.FormEvent<HTMLFormElement>) {}
+  const [selectedMarkUpId, setSelectedMarkUpId] = useState<string>();
+  const { markUps, loading, error } = useFetchMarkUps();
+  const { informations } = useFetchInfo();
+
+  const selectedProduct = useMemo((): InfoTypes | null => {
+    if (!cost.cod) {
+      return null;
+    }
+
+    const product = informations.find(item => item.cod === Number(cost.cod));
+
+    if (!product) {
+      return null;
+    }
+
+    return product;
+  }, [cost.cod, informations]);
+
+  const selectedMarkUp = useMemo((): MarkUpTypes | null => {
+    if (!selectedMarkUpId) {
+      return null;
+    }
+
+    const markUp = markUps.find(item => item.id === parseInt(selectedMarkUpId));
+
+    if (!markUp) {
+      return null;
+    }
+
+    return markUp;
+  }, [selectedMarkUpId, markUps]);
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    setCost(state => ({
+      ...state,
+      markUpProduct: selectedMarkUp,
+      infoProduct: selectedProduct,
+    }));
+    handleNextStep();
+  }
+
+  function handleClose() {}
+  function _handleValidation() {}
 
   return (
     <S.Container>
-      <form className="form" onSubmit={_handleValidation}>
-        <h1>Informações iniciais</h1>
+      <form className="form" onSubmit={handleSubmit}>
+        <h1>Informações Iniciais</h1>
         <Input
           type="text"
           label="Cód"
@@ -45,31 +93,47 @@ const HeaderForm = ({ cost, setCost, handleValidation, handleNextStep }: CostFor
             })
           }
         />
-        <SelectUnits
-          label="Unid"
-          name="unid"
-          value={cost.unid}
-          onChange={event =>
-            setCost({
-              ...cost,
-              unid: event.currentTarget.value,
-            })
-          }
-        />
-
-        <Input
-          type="number"
-          label="Qt Emb"
-          name="qt"
-          placeholder="Informe a quantidade na embalagem"
-          value={cost.qt}
-          onChange={event =>
-            setCost({
-              ...cost,
-              qt: event.target.value,
-            })
-          }
-        />
+        <div className="unidQt">
+          <div className="unit">
+            <SelectUnits
+              label="Unid"
+              name="unid"
+              value={cost.unid}
+              onChange={event =>
+                setCost({
+                  ...cost,
+                  unid: event.currentTarget.value,
+                })
+              }
+            />
+          </div>
+          <div className="qt">
+            <Input
+              type="number"
+              label="Quant. na Embalagem"
+              name="qt"
+              placeholder="Informe a quantidade"
+              value={cost.qt}
+              onChange={event =>
+                setCost({
+                  ...cost,
+                  qt: event.target.value,
+                })
+              }
+            />
+          </div>
+        </div>
+        <SelectOptions
+          value={selectedMarkUpId}
+          onChange={event => setSelectedMarkUpId(event.target.value)}
+          label="Mark Up"
+        >
+          {markUps.map(item => (
+            <option value={item.id} key={item.id}>
+              {item.name}
+            </option>
+          ))}
+        </SelectOptions>
         <div className="containerOptions">
           <label className="radioButtonTitle">Tipo de produto</label>
           <div className="containerRadioButton">
@@ -154,7 +218,7 @@ const HeaderForm = ({ cost, setCost, handleValidation, handleNextStep }: CostFor
           </div>
         </div>
         <div className="containerButtons">
-          <button className="btn" type="button" onClick={() => handleNextStep()}>
+          <button className="btn" type="submit">
             Adicionar Materiais
           </button>
         </div>

@@ -18,12 +18,16 @@ export const Container = styled.div`
     box-shadow: 2px 2px 5px #000;
   }
 
+  .form h1 {
+    color: var(--color9);
+  }
+
   .btn {
     width: 30%;
     height: 35px;
     border-radius: 5px;
     margin-top: 20px;
-    background-color: rgb(64, 62, 62);
+    background-color: var(--color9);
     color: #fff;
     padding: auto;
     text-decoration: none;
@@ -36,34 +40,9 @@ export const Container = styled.div`
 
   .btn:hover {
     font-weight: bold;
-    color: rgb(64, 62, 62);
+    color: var(--color9);
     background-color: #fff;
-    border: 2px solid rgb(64, 62, 62);
-  }
-
-  .containerOptions {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 5px;
-  }
-
-  .containerRadioButton {
-    border-radius: 5px;
-    background-color: #fff;
-    width: 70%;
-    height: 35px;
-    display: flex;
-    justify-content: space-around;
-    border: 1px solid rgb(64, 62, 62);
-  }
-
-  .radioButtonTitle {
-    font-weight: bold;
-    font-size: 16px;
-    color: #7b7b7b;
+    border: 2px solid var(--color9);
   }
 
   .containerButtons {

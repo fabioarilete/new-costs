@@ -4,278 +4,35 @@ export const Container = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
-  flex-direction: column;
-
-  .title {
-    background: black;
-    color: #ffbb33;
-    font-size: 40px;
-    text-align: center;
-    padding: 5px;
-  }
 
   .content {
     width: 100%;
     display: flex;
+    margin-top: -50px;
+    justify-content: end;
   }
 
   .headers {
     width: 30%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .header {
-    display: flex;
-    justify-content: space-around;
-    flex-direction: column;
+    left: 0;
+    position: fixed;
   }
 
   .containerCost {
-    height: 100vh;
-    width: 67%;
+    width: 70%;
+    justify-content: end;
+    padding: 10px 25px 10px 10px;
   }
 
   .costSheet {
     width: 100%;
-    height: 100vh;
-    margin-left: 15px;
-    padding-top: 10px;
-    margin-top: 10px;
-    border-radius: 10px;
+    padding: 15px 0 15px 0;
     background-color: #fff;
-    box-shadow: 2px 2px 5px #000;
+    border-radius: 5px;
   }
 
-  .incialContainer {
-    display: flex;
-    width: 100%;
-    justify-content: space-around;
-    align-items: center;
-  }
-
-  .logoContainer {
-    width: 33%;
-    height: 120px;
-    margin: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .logoContainer img {
-    margin: 10px;
-    width: 200px;
-  }
-
-  .logoContainer p {
-    font-weight: bold;
-  }
-
-  .imageContainer {
-    width: 33%;
-    height: 120px;
-    margin: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid grey;
-    border-radius: 10px;
-  }
-
-  .infoContainer {
-    width: 33%;
-    height: 120px;
-    margin: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .infoContainer p {
-    font-weight: bold;
-  }
-
-  .tipo {
-    width: 100%;
-    height: 30px;
-    display: flex;
-  }
-  .infoTitle {
-    margin-right: 15px;
-  }
-
-  .descriptionProduct {
-    margin: 10px;
-    display: flex;
-    flex-direction: column;
-    border: 0.5px solid #c0b7b7;
-  }
-
-  .headerDescription {
+  .containerInformations {
     width: 100%;
     display: flex;
-  }
-
-  .headerT {
-    text-align: center !important;
-    background-color: #262323;
-    color: #ffbb33;
-  }
-
-  .cod {
-    width: 20%;
-    border-bottom: 0.5px solid grey;
-    border-right: 0.5px solid #c0b7b7;
-    text-align: center;
-  }
-
-  .description {
-    width: 80%;
-    border-bottom: 0.5px solid #c0b7b7;
-    text-align: center;
-  }
-
-  .productMaterialsContainer {
-    margin: 10px;
-    margin-left: 25px;
-    display: flex;
-    flex-direction: column;
-    border: 0.5px solid #c0b7b7;
-  }
-
-  .productMaterials {
-    width: 100%;
-    display: flex;
-  }
-
-  .material {
-    width: 35%;
-    border-bottom: 0.5px solid grey;
-    border-right: 0.5px solid #c0b7b7;
-    text-align: center;
-    text-align: start;
-    padding-right: 5px;
-  }
-
-  .obsMaterial {
-    width: 17%;
-    border-bottom: 0.5px solid grey;
-    border-right: 0.5px solid #c0b7b7;
-    text-align: center;
-  }
-
-  .obsOperation {
-    width: 27%;
-    border-bottom: 0.5px solid grey;
-    border-right: 0.5px solid #c0b7b7;
-    text-align: center;
-  }
-
-  .qtMaterial {
-    width: 10%;
-    border-bottom: 0.5px solid grey;
-    border-right: 0.5px solid #c0b7b7;
-    text-align: center;
-  }
-
-  .unitMaterial {
-    width: 6%;
-    border-bottom: 0.5px solid grey;
-    border-right: 0.5px solid #c0b7b7;
-    text-align: center;
-  }
-
-  .valueMaterial {
-    width: 16%;
-    border-bottom: 0.5px solid grey;
-    border-right: 0.5px solid #c0b7b7;
-    text-align: end;
-    padding-right: 5px;
-  }
-
-  .totalMaterial {
-    width: 16%;
-    border-bottom: 0.5px solid grey;
-    border-right: 0.5px solid #c0b7b7;
-    text-align: end;
-    padding-right: 5px;
-  }
-
-  .subtotals {
-    width: 100%;
-    display: flex;
-  }
-
-  .totalTitle {
-    width: 80%;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: end;
-    padding-right: 5px;
-    background-color: #262323;
-    color: #ffbb33;
-  }
-
-  .total {
-    width: 20%;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: end;
-    padding-right: 5px;
-    background-color: #d0e857;
-  }
-
-  .totalsCost {
-    margin: 10px;
-    margin-left: 25px;
-    display: flex;
-    flex-direction: column;
-    align-items: end;
-  }
-
-  .totalsCostTitle {
-    width: 40%;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    padding-right: 5px;
-    background-color: #262323;
-    color: #ffbb33;
-    border: 0.5px solid #c0b7b7;
-  }
-
-  .container {
-    display: flex;
-    width: 40%;
-    border: 0.5px solid #c0b7b7;
-  }
-
-  .containerTotals {
-    width: 50%;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .totalsTitle {
-    width: 100%;
-    text-align: center;
-    background-color: #4f4a4a;
-    border-right: 0.5px solid #c0b7b7;
-    color: #ffbb33;
-    font-size: 20px;
-    font-weight: bold;
-  }
-
-  .totals {
-    width: 100%;
-    text-align: center;
-    border-right: 0.5px solid #c0b7b7;
-    font-size: 20px;
-    font-weight: bold;
   }
 `;
