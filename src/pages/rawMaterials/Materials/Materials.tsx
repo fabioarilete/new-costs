@@ -1,6 +1,5 @@
 import * as S from './style';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import Container from '../../../components/Container';
 import { MaterialTypes } from '../types/MaterialTypes';
 import { MaterialProvider } from '../context/MaterialContext';
@@ -8,6 +7,7 @@ import api from '../../../api/api';
 import NewMaterial from './new/NewMaterial';
 import { MaterialCard } from '../MaterialCard/MaterialCard';
 import UpdateMaterial from './update/UpdateMaterial';
+import { toast } from 'react-toastify';
 
 const inicialState: MaterialTypes = {
   id: '' as any,
@@ -27,12 +27,6 @@ const Materials = () => {
   const [selectedMaterial, setSelectedMaterial] = useState<MaterialTypes | null>(null);
   const [modalNewMaterial, setModalNewMaterial] = useState(false);
 
-  const location = useLocation();
-  let message = '';
-  if (location.state) {
-    message = location.state.message;
-  }
-
   useEffect(() => {
     api
       .get('materialsList')
@@ -51,6 +45,7 @@ const Materials = () => {
       .delete(`materialsList/${id}`)
       .then(() => {
         setMaterials(state => state.filter(material => material.id !== id));
+        toast.success('Material removido com sucesso!');
       })
       .catch(err => console.log(err));
   }

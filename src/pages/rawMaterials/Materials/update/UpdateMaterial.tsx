@@ -5,6 +5,7 @@ import Container from '../../../../components/Container';
 import { MaterialForm } from '../../MaterialForm/MaterialForm';
 import { useMaterials } from '../../context/MaterialContext';
 import { useMaterialTotal } from '../hooks/useMaterialTotal';
+import { toast } from 'react-toastify';
 
 const inicialState: MaterialTypes = {
   id: '' as any,
@@ -36,6 +37,7 @@ const UpdateMaterial = () => {
             return item;
           }),
         );
+        toast.success('Material editado com sucesso!');
       })
       .catch(err => console.log(err));
   }

@@ -1,6 +1,5 @@
 import * as S from './style';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import Container from '../../../components/Container';
 
 import api from '../../../api/api';
@@ -9,6 +8,7 @@ import OperationCard from '../OperationCard/OperationCard';
 import { OperationProvider } from '../context/OperationContext';
 import NewOperation from './new/NewOperation';
 import UpdateOperation from './update/UpdateOperation';
+import { toast } from 'react-toastify';
 
 const inicialState: OperationTypes = {
   id: '' as any,
@@ -23,12 +23,6 @@ const Operations = () => {
   const [operations, setOperations] = useState<any[]>([]);
   const [selectedOperation, setSelectedOperation] = useState<OperationTypes | null>(null);
   const [modalNewOperation, setModalNewOperation] = useState(false);
-
-  const location = useLocation();
-  let message = '';
-  if (location.state) {
-    message = location.state.message;
-  }
 
   useEffect(() => {
     api
@@ -48,6 +42,7 @@ const Operations = () => {
       .delete(`operationsList/${id}`)
       .then(() => {
         setOperations(state => state.filter(operation => operation.id !== id));
+        toast.success('Operação removida com sucesso!');
       })
       .catch(err => console.log(err));
   }

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import * as S from './Style';
 import { CostTypes } from '../../types/CostTypes';
-import { CostProvider } from '../../context/CostContext';
+import { CostProvider, useCosts } from '../../context/CostContext';
 import HeaderForm from '../../CostForms/HeaderForm/HeaderForm';
 import SourceMaterialsForm from '../../CostForms/SourceMaterialsForm/SourceMaterialsForm';
 import SourceOperationsForm from '../../CostForms/SourceOperationsForm/SourceOperationsForm';
@@ -10,6 +10,8 @@ import MaterialCost from '../../CostComponents/MaterialCost/MaterialCost';
 import OperationCost from '../../CostComponents/OperationCost/OperationCost';
 import MarkUpCost from '../../CostComponents/MarkUpCost/MarkUpCost';
 import ResultsCost from '../../CostComponents/ResultsCost/ResultsCost';
+import api from '../../../../api/api';
+import { toast } from 'react-toastify';
 
 const inicialCostState: CostTypes = {
   cod: '',
@@ -34,6 +36,7 @@ const inicialCostState: CostTypes = {
 
 const NewCost = () => {
   const [cost, setCost] = useState<CostTypes>(inicialCostState);
+  const { costs, setCosts } = useCosts();
   const [step, setStep] = useState(1);
 
   useEffect(() => {
@@ -128,6 +131,21 @@ const NewCost = () => {
 
   function handleRemove() {}
 
+  function addCost(cost: CostTypes) {
+    const data = { ...cost };
+    api
+      .post('products', data)
+      .then(res => {
+        setCosts(state => [...state, { ...data, id: res.data.id }]);
+      })
+      .catch(err => console.log(err));
+  }
+
+  function handleSubmit(cost: CostTypes) {
+    addCost(cost);
+    toast.success('Custo cadastrado com sucesso!');
+  }
+
   return (
     <CostProvider
       value={{
@@ -137,6 +155,9 @@ const NewCost = () => {
         handleLastStep,
         cost,
         setCost,
+        costs,
+        setCosts,
+        handleRemove,
       }}
     >
       <S.Container>
@@ -164,6 +185,7 @@ const NewCost = () => {
                   cost={cost}
                   setCost={setCost}
                   handleValidation={handleValidation}
+                  handleSubmit={handleSubmit}
                 />
               )
             )}

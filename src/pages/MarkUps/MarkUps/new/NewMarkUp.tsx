@@ -6,6 +6,7 @@ import { MarkUpTypes } from '../../types/MarkUpTypes';
 import { useMarkUps } from '../../context/MarkUpContext';
 import { MarkUpsForm } from '../../MarkUpsForm/MarkUpsForm';
 import { UseMarkUpCoef } from '../hooks/useMarkUpCoef';
+import { toast } from 'react-toastify';
 
 const inicialState: MarkUpTypes = {
   id: '' as any,
@@ -33,6 +34,7 @@ const NewMarkUp = () => {
       .post('markUpsList', data)
       .then(res => {
         setMarkUps(state => [...state, { ...data, id: res.data.id }]);
+        toast.success('Mark Up cadastrado com sucesso!');
       })
       .catch(err => console.log(err));
   }
@@ -50,7 +52,7 @@ const NewMarkUp = () => {
       !bonificacoes ||
       !lucro
     ) {
-      window.alert('Preencha todos os campos!');
+      toast.error('Preencher todos os campos!');
       return;
     }
     addMarkUp(markUp);

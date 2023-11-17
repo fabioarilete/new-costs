@@ -45,8 +45,6 @@ const SourceMaterialsForm = ({ cost, setCost, handleNextStep, handleLastStep, ha
     return material;
   }, [selectedMaterialId, materials]);
 
-  function handleClose() {}
-
   function handleSubmit(e: any) {
     e.preventDefault();
     if (!selectedMaterial) {

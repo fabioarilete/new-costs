@@ -8,7 +8,6 @@ import { MarkUpTypes } from '../../../MarkUps/types/MarkUpTypes';
 import SelectOptions from '../../../../components/form/SelectOptions/SelectOptions';
 import { useFetchMarkUps } from '../../Hooks/useFetchMarkUps';
 import { InfoTypes } from '../../types/InfoTypes';
-import { Code } from '@mui/icons-material';
 import { useFetchInfo } from '../../CostComponents/Hooks/useFetchInfo';
 
 interface CostFormProps {
@@ -59,9 +58,6 @@ const HeaderForm = ({ cost, setCost, handleValidation, handleNextStep }: CostFor
     }));
     handleNextStep();
   }
-
-  function handleClose() {}
-  function _handleValidation() {}
 
   return (
     <S.Container>

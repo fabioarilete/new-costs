@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
 import * as S from './Style';
 import { v4 as uuidv4 } from 'uuid';
 import { Input } from '../../../../components/form/Input';
@@ -13,9 +13,10 @@ interface CostTypesForm {
   setCost: Dispatch<SetStateAction<CostTypes>>;
   handleValidation(cost: CostTypes): void;
   handleLastStep(step?: number): void;
+  handleSubmit(cost: CostTypes): void;
 }
 
-const SourceOperationsForm = ({ cost, setCost, handleLastStep, handleValidation }: CostTypesForm) => {
+const SourceOperationsForm = ({ cost, setCost, handleLastStep, handleSubmit, handleValidation }: CostTypesForm) => {
   const [operations, setOperations] = useState<OperationTypes[]>([]);
   const [selectedOperationId, setSelectedOperationId] = useState<string>();
   const [qt, setQt] = useState('');
@@ -46,7 +47,7 @@ const SourceOperationsForm = ({ cost, setCost, handleLastStep, handleValidation 
     return operation;
   }, [selectedOperationId, operations]);
 
-  function handleSubmit(e: any) {
+  function addOperation(e: any) {
     e.preventDefault();
     if (!selectedOperation) {
       return;
@@ -75,10 +76,14 @@ const SourceOperationsForm = ({ cost, setCost, handleLastStep, handleValidation 
     setCav('');
     setCiclo('');
   }
+  function _handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    handleSubmit({ ...cost });
+  }
 
   return (
     <S.Container>
-      <form className="form" onSubmit={handleSubmit}>
+      <form className="form" onSubmit={_handleSubmit}>
         <h1>Adição de Operações</h1>
 
         <SelectOptions
@@ -155,7 +160,7 @@ const SourceOperationsForm = ({ cost, setCost, handleLastStep, handleValidation 
           <button className="btn" type="button" onClick={() => handleLastStep()}>
             Voltar
           </button>
-          <button className="btn" type="submit" onClick={handleSubmit}>
+          <button className="btn" type="button" onClick={addOperation}>
             Adiconar mais Operação
           </button>
           <button className="btn" type="submit">

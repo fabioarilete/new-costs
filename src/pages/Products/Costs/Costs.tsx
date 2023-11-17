@@ -4,6 +4,7 @@ import Container from '../../../components/Container';
 import { CostTypes } from '../types/CostTypes';
 import api from '../../../api/api';
 import { Link } from 'react-router-dom';
+import CostsCard from '../CostCard/CostsCard';
 
 const inicialCostState: CostTypes = {
   cod: '',
@@ -40,7 +41,7 @@ const Costs = () => {
       .catch(err => console.log(err));
   }, []);
 
-  function handleRemove(id: string) {
+  function handleRemove(id: number) {
     api
       .delete(`products/${id}`)
       .then(() => {
@@ -59,9 +60,9 @@ const Costs = () => {
       </S.Header>
 
       <S.ContainerCards>
-        {/* {costs.map(cost => (
-            <CostsCard cost={cost} handleRemove={handleRemove} key={cost.id} />
-          ))} */}
+        {costs.map(cost => (
+          <CostsCard cost={cost} handleRemove={handleRemove} key={cost.id} />
+        ))}
       </S.ContainerCards>
     </Container>
   );

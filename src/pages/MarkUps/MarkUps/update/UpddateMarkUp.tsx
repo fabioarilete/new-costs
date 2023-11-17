@@ -4,6 +4,7 @@ import Container from '../../../../components/Container';
 import { MarkUpTypes } from '../../types/MarkUpTypes';
 import { useMarkUps } from '../../context/MarkUpContext';
 import { MarkUpsForm } from '../../MarkUpsForm/MarkUpsForm';
+import { toast } from 'react-toastify';
 
 const inicialState: MarkUpTypes = {
   id: '' as any,
@@ -36,6 +37,7 @@ const UpDateMarkUp = () => {
             return item;
           }),
         );
+        toast.success('Mark Up editado com sucesso!');
       })
       .catch(err => console.log(err));
   }

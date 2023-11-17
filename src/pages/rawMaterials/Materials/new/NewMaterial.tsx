@@ -6,6 +6,7 @@ import { MaterialForm } from '../../MaterialForm/MaterialForm';
 import { useMaterialTotal } from '../hooks/useMaterialTotal';
 import { useMaterials } from '../../context/MaterialContext';
 import { Modal, ModalTarget } from '../../../../components/Modal/Modal';
+import { toast } from 'react-toastify';
 
 const inicialState: MaterialTypes = {
   id: '' as any,
@@ -30,6 +31,7 @@ const NewMaterial = () => {
       .post('materialsList', data)
       .then(res => {
         setMaterials(state => [...state, { ...data, id: res.data.id }]);
+        toast.success('Material cadastrado com sucesso!');
       })
       .catch(err => console.log(err));
   }
@@ -37,7 +39,7 @@ const NewMaterial = () => {
   function handleSubmit(material: MaterialTypes) {
     const { name, preco, icms, frete, nf, tipoFornecedor } = material;
     if (!name || !preco || !icms || !frete || !nf || !tipoFornecedor) {
-      window.alert('Preencha todos os campos!');
+      toast.error('Preencher todos os campos!');
       return;
     }
     addMaterial(material);

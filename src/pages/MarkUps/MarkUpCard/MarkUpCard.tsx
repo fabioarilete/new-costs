@@ -1,4 +1,3 @@
-import { useEffect, useMemo } from 'react';
 import { useMarkUps } from '../context/MarkUpContext';
 import { MarkUpTypes } from '../types/MarkUpTypes';
 import * as S from './style';

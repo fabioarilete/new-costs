@@ -1,6 +1,5 @@
 import * as S from './style';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import Container from '../../../components/Container';
 
 import api from '../../../api/api';
@@ -9,6 +8,7 @@ import { MarkUpProvider } from '../context/MarkUpContext';
 import NewMarkUp from './new/NewMarkUp';
 import UpDateMarkUp from './update/UpddateMarkUp';
 import MarkUpCard from '../MarkUpCard/MarkUpCard';
+import { toast } from 'react-toastify';
 
 const inicialState: MarkUpTypes = {
   id: '' as any,
@@ -31,12 +31,6 @@ const MarkUps = () => {
   const [selectedMarkUp, setSelectedMarkUp] = useState<MarkUpTypes | null>(null);
   const [modalNewMarkUp, setModalNewMarkUp] = useState(false);
 
-  const location = useLocation();
-  let message = '';
-  if (location.state) {
-    message = location.state.message;
-  }
-
   useEffect(() => {
     api
       .get('markUpsList')
@@ -55,6 +49,7 @@ const MarkUps = () => {
       .delete(`markUpsList/${id}`)
       .then(() => {
         setMarkUps(state => state.filter(markUp => markUp.id !== id));
+        toast.success('Mark Up removido com sucesso!');
       })
       .catch(err => console.log(err));
   }

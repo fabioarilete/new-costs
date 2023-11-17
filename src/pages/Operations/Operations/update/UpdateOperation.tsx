@@ -5,6 +5,7 @@ import Container from '../../../../components/Container';
 import { useOperations } from '../../context/OperationContext';
 import { OperationTypes } from '../../types/OperationTypes';
 import { OperationForm } from '../../OperationForm/OperationForm';
+import { toast } from 'react-toastify';
 
 const inicialState: OperationTypes = {
   id: '' as any,
@@ -30,6 +31,7 @@ const UpdateOperation = () => {
             return item;
           }),
         );
+        toast.success('Opração editada com sucesso!');
       })
       .catch(err => console.log(err));
   }

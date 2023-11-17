@@ -6,6 +6,7 @@ import { OperationTypes } from '../../types/OperationTypes';
 import { useOperations } from '../../context/OperationContext';
 import { OperationForm } from '../../OperationForm/OperationForm';
 import { Modal, ModalTarget } from '../../../../components/Modal/Modal';
+import { toast } from 'react-toastify';
 
 const inicialState: OperationTypes = {
   id: '' as any,
@@ -25,6 +26,7 @@ const NewOperation = () => {
       .post('operationsList', data)
       .then(res => {
         setOperations(state => [...state, { ...data, id: res.data.id }]);
+        toast.success('Operação cadastrada com sucesso!');
       })
       .catch(err => console.log(err));
   }
@@ -32,7 +34,7 @@ const NewOperation = () => {
   function handleSubmit(operation: OperationTypes) {
     const { name, valor, unid } = operation;
     if (!name || !valor || !unid) {
-      window.alert('Preencha todos os campos!');
+      toast.error('Preencher todos os campos!');
       return;
     }
     addOperation(operation);
